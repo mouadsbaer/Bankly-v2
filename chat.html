@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <title>Bankly</title>
+</head>
+<body>
+    <div class="module_customers" id="module_customers">
+        <div class="menu_close_module" id="menu_close_module">
+            <i class='bxr  bx-x' style='color:#ffffff'></i> 
+        </div>
+        <h2 id="module_msg">NEW MESSAGE</h2>
+        <div class="module_customers_inputs">
+            <div>
+                <input type="text" placeholder=" Account Number">
+            </div>
+            <div>
+                <input type="email" placeholder=" Subject">
+            </div>
+            <div>
+                <input type="tel" placeholder="Your status (Facultatif)">
+            </div>
+            
+        </div>
+        <div class="module_customers_btns">
+            <button id="cancel_btn">Cancel</button>
+            <button class="add_btn" id="add_btn">Send</button>
+        </div>
+    </div>
+    <div class="menu_content" id="menu_content">
+        <h2>DASHBOARD</h2>
+        <div class="menu_section">
+            <a href="index.html">DASHBOARD</a>
+            <i class='bxr  bx-apps' style='color:#ffffff'></i> 
+        </div>
+        <div class="menu_section">
+            <a href="customers.html">CUSTOMERS</a>
+            <i class='bxr  bx-people-handshake' style='color:#ffffff'></i> 
+        </div>
+        <div class="menu_section">
+            <a href="accounts.html">ACCOUNTS</a>
+            <i class='bxr  bx-bank' style='color:#ffffff'></i> 
+        </div>
+        <div class="menu_section">
+            <a href="transactions.html">TRANSACTIONS</a>
+            <i class='bxr  bx-arrow-right-left' style='color:#ffffff'></i> 
+        </div>
+        <div class="menu_section">
+            <a href="chat.html">CHAT</a>
+            <i class='bxr  bx-discussion' style='color:#ffffff'></i> 
+        </div>
+        <div class="menu_section last_item">
+            <a>LOG OUT</a>
+            <i class='bxr  bx-arrow-out-right-square-half' style='color:#ffffff'></i> 
+        </div>
+        <div class="container_menu_lang_btn">
+            <div class="menu_bnts">
+            <div class="container" id="container_dark_mode">
+                <div class="cercle" id="content_dark_mode"></div>
+            </div>
+            <div class="langage_site" id="langage_site"><i class='bxr  bx-chevron-down' style='color:#ffffff'></i>  AR</div>
+        </div>
+        <div class="menu_language_btn" id="menu_language_btn">
+                <div>English</div>
+                <div>Francais</div>
+                <div>العربية</div>
+        </div>
+        </div>
+        <div class="menu_close" id="menu_close">
+            <i class='bxr  bx-x' style='color:#ffffff'></i> 
+        </div>
+    </div>
+    <header>
+    <div class="point">$</div>
+        <div class="header_logo">
+            <div class="header_logo_imgr">
+                <img src="imgs/bankly_logo.png" alt="">
+            </div>
+            <div class="header_logo_img">
+                
+            </div>
+        </div>
+        <div class="header_right" id="header_right_logos_chat">
+            <div class="header_right_cercles">
+                <div class="header_right_cercle1"><div class="header_right_cercle2">         <div class="header_right_full_cercle"></div></div></div>
+                
+       
+            </div>
+            <div class="header_right_logos_chat">
+                <div class="header_right_logos_cont">
+                    <div class="header_right_logos_logo1 logo1">
+                    <img src="imgs/img1.png" alt="">
+                    </div>
+                    <div class="header_right_logos_logo1 logo2">
+                    <img src="imgs/img2.png" alt="">
+                    </div>
+                </div>
+                <div class="header_right_logos_cont1">
+                    <div class="header_right_logos_logo1 logo3">
+                    <img src="imgs/img3.png" alt="" style="display: none;">
+                    </div>
+                    <div class="header_right_logos_logo1 logo4">
+                    <img src="imgs/img4.png" alt="">
+                    </div>
+                </div>
+                <div class="header_right_logos_cont2">
+                    <div class="header_right_logos_logo1 logo5">
+                    <img src="imgs/img3.png" alt="">
+                    </div>
+                    <div class="header_right_logos_logo1 logo6">
+                    <img src="imgs/img4.png" alt="">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <button class="menu" id="menu">
+            <i class='bxr  bx-menu'></i> 
+        </button>
+        
+    </header>
+    
+    <main>
+        <div class="main_container_head" id="main_container_head">
+            <div class="main_container_head_p1">
+                <input type="search" placeholder="Search a transaction">
+                <i class='bxr  bx-search' style='color:#004E64'></i> 
+            </div>
+            <div class="main_container_head_p2">
+                <i class='bxr  bx-bell-ring' style='color:#004E64'></i> 
+                <i class='bxr  bx-spanner' style='color:#ffffff' id="settings_btn"></i> 
+                
+            </div>
+            <div class="main_container_head_p2_settings" id="container_settings">
+                    <button>DEPOSIT</button>
+                    <button>WITHDRAW</button>
+                    <button>SETTINGS</button>
+            </div>
+        </div>
+        <div class="main_container_head2">
+            <div class="main_container_head2_infos">
+                <p><span>20</span> MESSAGES</p>
+            </div>
+            <div class="main_container_head2_filter">
+                <div class="filter">
+                    <button>Filter</button>
+                </div>
+                <div class="add_customer">
+                    <button id="show_module_customers">Send a Messsage</button>
+                </div>
+            </div>
+        </div>
+        <section class="transactions_section">
+            <table class="chat_table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Account N°</th>
+                        <th>Owners</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="container_transaction">
+                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
+                        <td>MLNB1235598</td>
+                        <td>Mouad Saber</td>
+                        <td>2024-12-20 10:10:10</td>
+                        
+                    </tr>
+                    <tr class="container_transaction">
+                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
+                        <td>MLNB1235598</td>
+                        <td>Mouad Saber</td>
+                        <td>2024-12-20</td>
+                    </tr>
+                    <tr class="container_transaction">
+                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
+                        <td>MLNB1235598</td>
+                        <td>Mouad Saber</td>
+                        <td>2024-12-20</td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <div class="online_members_container">
+                <div class="online_members">
+                <div class="member">
+                    <img src="imgs/profile.png" alt="" style="width: 100%;">
+                    <div class="online_members_cercle"></div>
+                </div>
+                <div class="member">
+                    <img src="imgs/profile.png" alt="" style="width: 100%;">
+                    <div class="online_members_cercle"></div>
+                </div>
+                <div class="member">
+                    <img src="imgs/profile.png" alt="" style="width: 100%;">
+                    <div class="online_members_cercle"></div>
+                </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <h1>LET US PLAN YOUR FINANCIAL DREAM FOR YOU</h1>
+        <div class="infos_container">
+            <div class="infos_container_left">
+                <i class='bxr  bx-envelope' style='color:#ffffff'></i> 
+                <a href="#">mouadsbaer@gmail.com</a>
+            </div>
+            <div class="infos_container_center">
+                <div class="infos_container_center_cont">
+                    <i class='bxr  bx-envelope' style='color:#ffffff'></i> 
+                    <a href="https://github.com/mouadsbaer">mouad saber</a>
+                </div>
+                <div class="infos_container_center_cont">
+                    <i class='bxr  bx-phone bx-flip-horizontal' style='color:#ffffff'></i> 
+                    <a>+212618733244</a>
+                </div>
+                <div class="infos_container_center_cont">
+                    <i class='bxr  bx-location-alt-2' style='color:#ffffff'></i> 
+                    <a href="">Mouad saber</a>
+                </div>
+            </div>
+            <div class="infos_container_right">
+                 
+                <div><i class='bxr  bx-location-alt-2' style='color:#ffffff'></i></div>
+                <div><i class='bxr  bx-location-alt-2' style='color:#ffffff'></i></div>
+                <div><i class='bxr  bx-location-alt-2' style='color:#ffffff'></i></div>
+            </div>
+        </div>
+        <div class="cercle_mother">
+            <div class="cercle_daughter"></div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="js/module.js"></script>
+    <script src="js/menu&dark_mode.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/settings.js"></script>
+
+</body>
+</html>
