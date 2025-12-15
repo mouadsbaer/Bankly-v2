@@ -951,12 +951,15 @@ body.dark_mode{
     background-color: #0d7d9c;
     cursor: pointer;
 }
+.main_main_container_head_p2_settings{
+    position: relative;
+}
 .main_container_head .main_container_head_p2_settings{
     border: 2px solid #004E64;
     position: absolute;
     width: 120px;
-    top: 63px;
-    right: 0;
+    top: 40px;
+    right: -50px;
     border-radius: 7px;
     display: none;
 }
