@@ -43,22 +43,25 @@ header{
     border-top: none;
     animation-name: mouad1;
     animation-timing-function: linear;
-    animation-duration: 3s;
+    animation-duration: 5s;
     animation-iteration-count: 1;
-    animation-delay: 5s;
+    animation-delay: 3s;
+    opacity: 0;
     
 }
 @keyframes mouad1 {
     0%{
+        opacity: 1;
         border-top: 0;
     }
     30%, 80%{
+        opacity: 1;
         border-top: 1px solid #efecec;
         
     }
     100%{
         border: none;
-        
+        opacity: 0;
     }
 }
 .header_right .hedaer_right_cercles{
@@ -358,6 +361,7 @@ footer{
     overflow-y: hidden;
     padding: 30px 10px;
     margin-top: 150px;
+    
 }
 footer h1{
     color: #28FF48;
@@ -999,6 +1003,54 @@ main{
     left: 50%;
     transform: translate(-228%, -23%);
 }
+.section_over_view .item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 23%;
+    border: 1px solid #004E64;
+    height: 200px;
+    border-radius: 8px;
+    padding: 20px 0;
+    
+    transition: .8s;
+
+}
+.section_over_view .item:hover{
+    background: #004E64;
+    color: #fffefe;
+    cursor: pointer;
+}
+.section_over_view .item:nth-child(even){
+    background: #004E64;
+    color: #fffefe;
+    transition: .8s;
+
+}
+.section_over_view .item:nth-child(even):hover{
+background: #fffefe;
+color: #004E64;
+
+
+}
+.section_over_view .item p{
+    font-size: 3.5vmin;
+}
+.section_over_view .item h2{
+    font-size: 5vmin;
+}
+.section_over_view .item i{
+    font-size: 4vmin;
+    font-weight: bold;
+}
+.section_over_view{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 10px;
+}
+
 @media (min-width: 550px) and (max-width : 950px) {
     
     #titre1{
@@ -1035,7 +1087,9 @@ main{
     .body_part2 .body_part2_stats{
         flex-direction: row;
     }
-
+    .full_screen{
+    display: none;
+}
 }
 @media (min-width: 951px) {
     .header_right .header_right_cercles .header_right_cercle1{
@@ -1274,5 +1328,7 @@ main{
         align-items: center;
         font-size: 6vmin;
     }
-
+    .full_screen{
+    display: none;
+}
 }

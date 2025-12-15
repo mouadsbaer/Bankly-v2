@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Bankly</title>
 </head>
 <body class="body_racine">
@@ -68,12 +69,12 @@
         </div>
         <div class="body_part2" style="gap: 10px; flex-direction: row; padding-left: 20px;">
             <div class="body_part2_btn" style="border-radius: 10px;" >
-                <p><a href="home.html" style="font-weight: 600;">User Account</a></p>
-                <i class='bxr  bx-arrow-to-right' style='color:#fefefe'></i> 
+                <a href="login.html" style="font-weight: 600;">User Account</a>
+                <i class="fa-solid fa-user-plus" style="color: #fefefe; font-size: 2.5vmin;"></i>
             </div>
             <div class="body_part2_btn" style="border-radius: 10px;" id="agent_btn">
-                <p><a href="home.html">Agent Account</a></p>
-                <i class='bxr  bx-arrow-to-right' style='color: #fefefe'></i> 
+                <a href="login.html">Agent Account</a>
+                <i class="fa-brands fa-black-tie" style="color: #fefefe; font-size: 2.5vmin;"></i>
             </div>
         </div>
         
@@ -86,33 +87,35 @@
         <div style="position: relative;">
             <div class="infos_container">
             <div class="infos_container_left" >
-                <i class='bxr  bx-envelope' style='color: #004E64;'></i> 
-                <a href="#" style='color: #004E64; z-index: 99;'>mouadsbaer@gmail.com</a>
+                <i class='bxr  bx-envelope' style='color: #004E64; font-size: 3vmin ;font-weight: bold;'></i> 
+                <a href="mailTo : mouadsbaer@gmail.com" style='color: #004E64; z-index: 99;'>mouadsbaer@gmail.com</a>
             </div>
-            <div class="infos_container_center" style="z-index: 99; position: absolute; top: 0;left: 50%; transform: translate(-50%,50%);">
-                <div class="infos_container_center_cont">
-                    <i class='bxr  bx-envelope' style='color: #004E64;'></i> 
-                    <a href="https://github.com/mouadsbaer" style='color: #004E64;'>mouad saber</a>
-                </div>
-                <div class="infos_container_center_cont">
-                    <i class='bxr  bx-phone bx-flip-horizontal' style='color: #004E64;'></i> 
-                    <a href="tel : +212618733244" style='color: #004E64;'>+212618733244</a>
-                </div>
-                <div class="infos_container_center_cont">
-                    <i class='bxr  bx-location-alt-2' style='color: #004E64;'></i> 
-                    <a href="" style='color: #004E64;'>You Code</a>
-                </div>
-            </div>
-            <div class="infos_container_right">
-                 
-                <div><i class='bxr  bx-location-alt-2' style='color: #004E64;'></i></div>
-                <div><i class='bxr  bx-location-alt-2' style='color: #004E64;'></i></div>
-                <div><i class='bxr  bx-location-alt-2' style='color: #004E64;'></i></div>
+            
+            <div class="infos_container_right" style="display: flex; flex-direction: column; gap: 10px;">
+                 <div><a href="https://www.linkedin.com/in/mouad-sbaer-1499a0374/"><i class="fa-brands fa-linkedin" style="color: #004E64; font-size: 3vmin;"></i></a></div>
+                <div><a href="#"><i class="fa-brands fa-facebook" style='color: #004E64; font-size: 3vmin;'></i></a></div>
+                <div><a href="#"><i class="fa-brands fa-instagram" style="color: #004E64; font-size: 3vmin;"></i></a></div>
+                
             </div>
         </div>
         <div class="cercle_mother" style="border: 1px solid #004E64; overflow: hidden; position: absolute;">
             <div class="rectongle_son" style="color: whitesmoke; text-align: center;">MS</div>
-            <div class="cercle_daughter" style="border: 1px solid #004E64;position: absolute;background-color: #fffefe;"></div>
+            <div class="cercle_daughter" style="border: 1px solid #004E64;position: absolute;background-color: #fffefe;">
+                <div class="infos_container_center" style="z-index: 99;display: flex; flex-direction: column; padding: 35px 20px; gap: 10px;">
+                    <div class="infos_container_center_cont">
+                        <i class="fa-brands fa-github" style="color: #004E64;"></i>
+                        <a href="https://github.com/mouadsbaer" style='color: #004E64; font-size: 2vmin; font-weight: bold;'>mouad saber</a>
+                    </div>
+                    <div class="infos_container_center_cont" style="display: flex;">
+                        <i class='bxr  bx-phone bx-flip-horizontal' style='color: #004E64;'></i> 
+                        <a href="tel : +2120618733244" style='color: #004E64;  font-size: 2vmin; font-weight: bold;'>+212618733244</a>
+                    </div>
+                    <div class="infos_container_center_cont">
+                        <i class='bxr  bx-location-alt-2' style='color: #004E64;'></i> 
+                        <a href="https://youcode.ma/" style='color: #004E64; font-size: 2vmin; font-weight: bold;'>You Code</a>
+                    </div>
+                </div>
+            </div>
         </div>
         </div>
     </footer>
