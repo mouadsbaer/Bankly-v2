@@ -817,6 +817,14 @@ body.dark_mode{
     display: flex;
     gap: 20px;
 }
+.main_container_head2 .main_container_head2_filter .filter_container .filter .filter_btn{
+    transition: .5s;
+}
+.main_container_head2 .main_container_head2_filter .filter_container .filter .filter_btn:hover{
+    background-color: #1b8aa6c1;
+    cursor: pointer;
+    color: #004E64;
+}
 .main_container_head2 {
     display: flex;
     justify-content: space-between;
@@ -1069,11 +1077,22 @@ color: #004E64;
     transition: .5s;
     cursor: pointer;
     color: #004E64;
+   
+}
+
+.main_container_head2 .main_container_head2_filter .filter_container .filter_menu{
+    display: none;
 }
 .main_container_head2 .main_container_head2_filter .filter_container .filter_menu button:hover{
     background-color: #31bce2c4;
     color: #fffefe;
 }
+.main_container_head2 .main_container_head2_filter .filter_container .filter_menu.open {
+    display: flex;
+    z-index: 999999;
+    position: absolute;
+}
+
 @media (min-width: 550px) and (max-width : 950px) {
     
     #titre1{

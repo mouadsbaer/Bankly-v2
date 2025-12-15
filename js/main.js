@@ -13,7 +13,6 @@ const email_input = document.getElementById('email_input');
 const password_input = document.getElementById('password_input');
 const customers_section_customer = document.getElementById('customers_section_customer');
 const statistiques_all = document.getElementById('statistiques');
-
 const agent_btn = document.getElementById('agent_btn');
 const btn_login = document.getElementById('btn_login');
 
@@ -51,6 +50,3 @@ container_dark_mode.addEventListener('click', ()=>{
     
 });
 
-agent_btn.addEventListener('click', ()=>{
-    alert('Contact your admin to discuss the registration matter')
-});
