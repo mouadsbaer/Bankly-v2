@@ -2,7 +2,8 @@
     include 'connect/db_connexion.php';
 
 
-    $rqt1 = 'SELECT COUNT(*) FROM customers;';
+    $rqt1 = 'SELECT COUNT(*) FROM customers c
+            JOIN accounts a ON c.customer_id = a.customer_id;';
     $result1 = mysqli_query($connexion, $rqt1);
     $row = mysqli_fetch_row($result1);
     $customers_nbr = $row[0];

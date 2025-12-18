@@ -1,10 +1,84 @@
 <?php
+
+    //<?php ($account['full_name'] == 'saving') ? 'SV' : ($account['full_name'] == 'chacking') 'CH' : 'BS' 
+    
+
     include 'connect/db_connexion.php';
 
     $rqt1 = "SELECT Count(*) FROM accounts";
     $result1 = mysqli_query($connexion, $rqt1);
     $row = mysqli_fetch_row($result1);
     $accounts_nbr = $row[0];
+
+
+    $rqt2 = "SELECT a.account_id, a.account_number, c.full_name, a.account_type FROM accounts a JOIN customers c ON a.customer_id = c.customer_id";
+    $result2 = mysqli_query($connexion, $rqt2);
+    $accounts = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    mysqli_free_result($result2);
+
+    $account_number = $account_type = $owner_name = $advisor_name = '';
+    $errors = array('account_number' => '', 'account_type' => '', 'owner_name' => '', 'advisor_name'=> '');
+            if(isset($_POST['add_account'])){
+                if(empty($_POST['account_number'])){
+                    $errors['account_number'] = 'The account number field should not be empty';
+                }
+                else{
+                    $account_number = $_POST['account_number'];
+                    if(!preg_match($account_number, '/^[A-Z][A-z0-9]{8}/$')){
+                        $errors['account_number'] = 'The account number should not be in format correct';
+                    }
+                }
+                if(empty($_POST['account_type'])){
+                    $errors['account_type'] = 'The account type field should not be empty';
+                }
+                else{
+                    $account_type = $_POST['account_type'];
+                    if($account_type != 'saving' && $account_type != 'checking' && $account_type != 'business'){
+                        $errors['account_number'] = 'Chose a type account (saving, checking, business)';
+                    }
+                }
+                if(empty($_POST['owner_name'])){
+                    $errors['owner_name'] = 'The owner field should not be empty';
+                }
+                else{
+                    $owner_name = $_POST['owner_name'];
+                    if(!preg_match('/^[A-Za-z\s]+$/')){
+                        $errors['account_number'] = 'You should enter a full name (ex: Hean Deal)';
+                    }
+                }
+                if(empty($_POST['advisor_name'])){
+                    $errors['advisor_name'] = 'The advisor field should not be empty';
+                }
+                else{
+                    $advisor_name = $_POST['advisor_name'];
+                    if(!preg_match('/^[A-Za-z\s]+$/')){
+                        $errors['advisor_name'] = 'You should enter a full name (ex: Hean Deal)';
+                    }
+                }
+
+                if(!array_filter($errors)){
+                    $rqt3= "SELECT customer_id FROM customers WHERE full_name = '$owner_name'";
+                    $result3 = mysqli_query($connexion, $rqt3);
+                    $row = mysqli_fetch_row($result3);
+                    $owner_id = row[0];
+                    
+                    $rqt4= "SELECT advisor_id FROM customers WHERE full_name = '$advisor_name'";
+                    $result4 = mysqli_query($connexion, $rqt4);
+                    $row = mysqli_fetch_row($result4);
+                    $advisor_id = row[0];
+
+
+                    $rqt5 = "INSERT INTO accounts(account_number,account_type, customer_id, advisor_id) values ('$account_number', '$account_type', '$owner_id','$advisor_id')";
+
+                    if(mysqli_query($connexion, $rqt5)){
+                        header("location: accounts.php");
+                        exit;
+                    }
+                    else{
+                        echo 'Insertion Error' . mysqli_error($connexion);
+                    }
+                }
+            }
 
 ?>
 
@@ -25,24 +99,30 @@
             <i class='bxr  bx-x' style='color:#ffffff'></i> 
         </div>
         <h2 id="module_msg">NEW ACCOUNT</h2>
-        <div class="module_customers_inputs">
+        <form action="accounts.php" method="post">
+            <div class="module_customers_inputs">
             <div>
-                <input type="text" placeholder="Account Number">
+                <input type="text" placeholder="Account Number" name="account_number" value="<?php echo $account_number ?>">
+                <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['account_number'] ?></div>
             </div>
             <div>
-                <input type="email" placeholder="Account Type">
+                <input type="email" placeholder="Account Type" name="account_type" >
+                <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['account_type'] ?></div>
             </div>
             <div>
-                <input type="tel" placeholder="Owner Name">
+                <input type="tel" placeholder="Owner Name" name="owner_name" value="<?php echo $owner_name?>">
+                <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['owner_name'] ?></div>
             </div>
             <div>
-                <input type="text" placeholder="Advisor Name (Facultatif)">
+                <input type="text" placeholder="Advisor Name (Facultatif)" name="advisor_name" value="<?php echo $advisor_name ?>">
+                <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['advisor_name'] ?></div>
             </div>
         </div>
         <div class="module_customers_btns">
             <button id="cancel_btn">Cancel</button>
-            <button class="add_btn" id="add_btn">Add</button>
+            <button class="add_btn" id="add_btn" name="add_account">Add</button>
         </div>
+        </form>
     </div>
     <div class="menu_content" id="menu_content">
         <h2>DASHBOARD</h2>
@@ -177,13 +257,15 @@
             </div>
         </div>
         <section class="customers_section">
+            <?php if(!empty($accounts)): ?>
+                <?php foreach($accounts as $account): ?>
             <div class="customers_section_customer" id="customers_section_customer">
                 <div class="customers_section_customer_img">
                     <p class="account_type" id="account_type">CH</p>
                 </div>
                 <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
+                    <h3><?= $account['full_name'] ?></h3>
+                    <p><?= $account['account_number'] ?></p>
                 </div>
                 <div class="container_container_infos">
                     <button class="delete_account">
@@ -191,134 +273,17 @@
                         <i class='bxr  bx-trash-x'></i> 
                         
                     </button>
-                    <div class="modify_infos">
+                    <a class="modify_infos" href="#">
                         <i class='bxr  bx-pencil' ></i> 
-                    </div>
+                    </a>
                 </div>
                 <div class="details_btn">
                     <i class='bxr  bx-dots-horizontal-rounded' style='color:#004E64'></i> 
                 </div>
             </div>
-            <div class="customers_section_customer" >
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
+            <?php endforeach ?>
+            <?php endif ;?>
+
         </section>
     </main>
 
