@@ -1,4 +1,12 @@
+<?php
+    include 'connect/db_connexion.php';
 
+    $rqt1 = "SELECT Count(*) FROM accounts";
+    $result1 = mysqli_query($connexion, $rqt1);
+    $row = mysqli_fetch_row($result1);
+    $accounts_nbr = $row[0];
+
+?>
 
 
 <!DOCTYPE html>
@@ -9,7 +17,7 @@
     <link rel="stylesheet" href="main.css">
     <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Bankly</title>
+    <title>Bankly - Accounts</title>
 </head>
 <body>
     <div class="module_customers" id="module_customers">
@@ -150,7 +158,7 @@
         </div>
         <div class="main_container_head2">
             <div class="main_container_head2_infos">
-                <p><span>32</span> ACCOUNTS</p>
+                <p><span><?php echo $accounts_nbr ?></span> ACCOUNTS</p>
             </div>
             <div class="main_container_head2_filter">
                     <div class="filter_container">
