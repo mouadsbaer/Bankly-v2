@@ -2,6 +2,7 @@ const show_module_customers = document.getElementById('show_module_customers');
 const module_customers = document.getElementById('module_customers');
 const menu_close_module = document.getElementById('menu_close_module')
 const cancel_btn = document.getElementById('cancel_btn');
+const add_btn = document.getElementById('add_btn');
 const module_msg = document.getElementById('module_msg');
 
 show_module_customers.addEventListener('click', ()=>{
@@ -36,6 +37,5 @@ cancel_btn.addEventListener('click', ()=>{
   },1000)
   
 });
-
 
 

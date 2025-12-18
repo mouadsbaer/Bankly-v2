@@ -1,3 +1,8 @@
+
+<?php
+    include 'connect/db_connexion.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,49 +13,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Bankly</title>
 </head>
-<body>
-    <div class="module_customers" id="module_customers">
-        <div class="menu_close_module" id="menu_close_module">
-            <i class='bxr  bx-x' style='color:#ffffff'></i> 
-        </div>
-        <h2 id="module_msg">NEW MESSAGE</h2>
-        <div class="module_customers_inputs">
-            <div>
-                <input type="text" placeholder=" Account Number">
-            </div>
-            <div>
-                <input type="email" placeholder=" Subject">
-            </div>
-            <div>
-                <input type="tel" placeholder="Your status (Facultatif)">
-            </div>
-            
-        </div>
-        <div class="module_customers_btns">
-            <button id="cancel_btn">Cancel</button>
-            <button class="add_btn" id="add_btn">Send</button>
-        </div>
-    </div>
+    
+<body >
     <div class="menu_content" id="menu_content">
         <h2>DASHBOARD</h2>
         <div class="menu_section">
-            <a href="home.html">DASHBOARD</a>
+            <a href="#">DASHBOARD</a>
             <i class='bxr  bx-apps' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="customers.html">CUSTOMERS</a>
+            <a href="customers.php">CUSTOMERS</a>
             <i class='bxr  bx-people-handshake' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="accounts.html">ACCOUNTS</a>
+            <a href="accounts.php">ACCOUNTS</a>
             <i class='bxr  bx-bank' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="transactions.html">TRANSACTIONS</a>
+            <a href="transactions.php">TRANSACTIONS</a>
             <i class='bxr  bx-arrow-right-left' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="chat.html">CHAT</a>
+            <a href="chat.php">CHAT</a>
             <i class='bxr  bx-discussion' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section last_item">
@@ -84,7 +68,7 @@
                 
             </div>
         </div>
-        <div class="header_right full_screen">
+        <div class="header_right">
             <div class="header_right_cercles">
                 <div class="header_right_cercle1"><div class="header_right_cercle2">         <div class="header_right_full_cercle"></div></div></div>
                 
@@ -123,100 +107,42 @@
         </button>
         
     </header>
-    
-    <main>
-        <div class="main_container_head" id="main_container_head">
-            <div class="main_container_head_p1">
-                <input type="search" placeholder="Search a transaction">
-                <i class='bxr  bx-search' style='color:#004E64'></i> 
+    <section class="section_welcome">
+        <div class="body_part1">
+            <div class="body_part1_btn">
+                <h2 id="t"><a href="#">GET THE APP NOW</a></h2>
             </div>
-            <div class="main_container_head_p2">
-                <i class='bxr  bx-bell-ring' style='color:#004E64'></i> 
-                <div class="main_main_container_head_p2_settings">
-                    <i class='bxr  bx-spanner' style='color:#ffffff' id="settings_btn"></i> 
-                
-                <div class="main_container_head_p2_settings" id="container_settings">
-                    <button>ALL MESSAGES</button>
-                    <button>STATISTIQUES</button>
-                    <button>RAPPORTS</button>
-                </div>
-                </div>
-            </div>
-            
+            <h1 id="titre1" class="titre1">Financial <br> Banking Management <br>Solutions</h1>
         </div>
-        <div class="main_container_head2">
-            <div class="main_container_head2_infos">
-                <p><span>20</span> MESSAGES</p>
-            </div>
-            <div class="main_container_head2_filter">
-                    <div class="filter_container">
-                        <div class="filter" >
-                            <button id="filter_btn" class="filter_btn">Filter</button>
-                        </div>
-                        <div class="filter_menu" id="filter_menu">
-                            <button>Last send</button>
-                            <button>First Send</button>
-                            <button>Status</button>
-                        </div>
-                    </div>
-                <div class="add_customer">
-                    <button id="show_module_customers">Send a Messsage</button>
-                </div>
-            </div>
+        <div class="body_part2">
+            <div class="body_part2_btn">
+                <p><a href="#section_start">Over View</a></p>
+                <i class='bxr  bx-arrow-to-right' style='color:#ffffff'></i> 
+            </div> 
         </div>
-        <section class="transactions_section">
-            <table class="chat_table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Account N°</th>
-                        <th>Owners</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="container_transaction">
-                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20 10:10:10</td>
-                        
-                    </tr>
-                    <tr class="container_transaction">
-                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                    </tr>
-                    <tr class="container_transaction">
-                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                    </tr>
-                </tbody>
-
-            </table>
-            <div class="online_members_container">
-                <div class="online_members">
-                <div class="member">
-                    <img src="imgs/profile.png" alt="" style="width: 100%;">
-                    <div class="online_members_cercle"></div>
-                </div>
-                <div class="member">
-                    <img src="imgs/profile.png" alt="" style="width: 100%;">
-                    <div class="online_members_cercle"></div>
-                </div>
-                <div class="member">
-                    <img src="imgs/profile.png" alt="" style="width: 100%;">
-                    <div class="online_members_cercle"></div>
-                </div>
-
-                </div>
-            </div>
-        </section>
-    </main>
-
+    </section>
+    <section class="section_over_view">
+        <div class="item">
+            <p>Balance</p>
+            <i class='bxr  bx-arrow-to-right' style='color:#004E64'></i> 
+            <h2>235</h2>
+        </div>
+        <div class="item">
+            <p>Balance</p>
+            <i class='bxr  bx-arrow-to-right' style='color:#ffffff'></i> 
+            <h2>235</h2>
+        </div>
+        <div class="item">
+            <p>Balance</p>
+            <i class='bxr  bx-arrow-to-right' style='color:#004E64'></i> 
+            <h2>235</h2>
+        </div>
+        <div class="item">
+            <p>Balance</p>
+            <i class='bxr  bx-arrow-to-right' style='color:#ffffff'></i> 
+            <h2>235</h2>
+        </div>
+    </section>
     <footer>
         <h1>LET US PLAN YOUR FINANCIAL DREAM FOR YOU</h1>
         <div class="infos_container">
@@ -253,11 +179,7 @@
         </div>
     </footer>
     <script src="js/main.js"></script>
-    <script src="js/module.js"></script>
     <script src="js/menu&dark_mode.js"></script>
     <script src="js/language.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/filter.js"></script>
-
 </body>
 </html>

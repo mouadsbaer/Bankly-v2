@@ -1,3 +1,61 @@
+<?php
+
+
+    session_start();
+    // Insetion de fichier pour connecter la base de donnees :
+    include 'connect/db_connexion.php';
+
+    // Validation de formulaire de connexion :
+
+    $email = $pass = '';
+    $errors = array('email' => '' , 'password' => '');
+    if(isset($_POST['submit'])){
+        if(empty($_POST['email_input'])){
+            $errors['email'] = 'the email field should not be empty';
+        }
+        else{
+            $email = htmlspecialchars($_POST['email_input']);
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $errors['email'] = 'the email should be in correct format';
+            }
+        }
+        if(empty($_POST['password_input'])){
+            $errors['password'] = 'the password field should not be empty';
+        }
+        else{
+            $pass = $_POST['password_input'];
+            if(strlen($pass) < 8 || !preg_match('/[a-z]/', $pass) || !preg_match('/[A-Z]/', $pass) ||!preg_match('/[0-9]/', $pass) || !preg_match('/[^a-zA-Z0-9]/', $pass) ){
+                if(strlen($pass) < 8){
+                    $errors['password'] = 'the password length must be 8 characters at least';
+                }
+                if(!preg_match('/[a-z]/', $pass)){
+                    $errors['password'] = 'the password must contain at least one lowercase';
+                }
+                if(!preg_match('/[A-Z]/', $pass)){
+                    $errors['password'] = 'the password must contain at least one uppercase';
+                }
+                if(!preg_match('/[0-9]/', $pass)){
+                    $errors['password'] = 'the password must contain at least one number';
+                }
+                if(!preg_match('/[^a-zA-Z0-9]/',$pass)){
+                    $errors['password'] = 'the password must contain at least one special caracters';
+                }
+            
+            }
+        
+            
+        }
+
+        if(!array_filter($errors)){
+            
+            $redirect = header("location: home.php");
+            exit;
+            
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +64,11 @@
     <link rel="stylesheet" href="main.css">
     <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Bankly- Create a user account</title>
+    <title>Bankly</title>
 </head>
     
 <body >
+    
     <header>
     <div class="point">$</div>
         <div class="header_logo">
@@ -54,19 +113,19 @@
                 
             </div>
         </div>
-       
+        
         
     </header>
     <section class="section_welcome">
         <div class="body_part1">
             <div class="body_part1_btn">
-                <h2 id="t">GET THE APP NOW</h2>
+                <h2 id="t"><a href="#">GET THE APP NOW</a></h2>
             </div>
             <h1 id="titre1" class="titre1">Financial <br> Banking Management <br>Solutions</h1>
         </div>
         <div class="body_part2">
             <div class="body_part2_btn">
-                <p><a href="#section_start"> Get Started</a></p>
+                <p><a href="#section_start">Get Started</a></p>
                 <i class='bxr  bx-arrow-to-right' style='color:#ffffff'></i> 
             </div>
             <div class="body_part2_stats">
@@ -88,28 +147,26 @@
             
         </div>
         <div class="body_part2_parag">
-                <p style="line-height: 4vmin;">By Creating Your Account With Us <br> You Have The Opportunity To Bring Your Financial Dream To Reality <br> Contact Us If You Need any Help or Advice <br>We Are Here For You</p>
+                <p>A universal solution <br> for financial customers and banks br providing 
+comprehensive banking services around the world</p>
         </div>
     </section>
     <section class="section_account">
         <div>
         <div class="section_account_titles" id="section_start">
-        <h1 class="titre2">WELCOME</h1>
-        <h2 class="titre3">Create Your User Account</h2>
+        <h1 class="titre2">WELCOME BACK</h1>
+        <h2 class="titre3">Log in to your account</h2>
         </div>
         <div class="section_account_inputs">
-             <form action="#">
-                <div><input type="text" placeholder="Type your Full Name here" id="f_name_input"></div>
-                <div><input type="email" placeholder="Type your Email here" id="email_input"></div>
-                <div><input type="tel" placeholder="Type your Phone Number" id="phone_input"></div>
-                <div><input type="password" placeholder="Type your password here" id="password_input"></div>
-                <div><input type="password" placeholder="Confirm your password here" id="password_confirmation_input"></div>
+             <form action="login.php" method="post">
+                <div><input type="text" placeholder="Type your email here" id="email_input" name="email_input" value="<?php echo $email ?>"><div style="color:red; font-size:1.6vmin; width:50%"> <?php echo $errors['email'] ?></div></div>
+                <div><input type="password" placeholder="Type your password here" id="password_input" name="password_input" value="<?php echo $pass ?>"><div style="color:red; font-size:1.6vmin; width:50%"> <?php echo $errors['password'] ?></div></div>
                 <div class="section_account_inputs_msgs">
-                    <p class="msg_create"><a href="home.html">Already have an account? Log In</a></p>
-                    <p class="msg_forgot"><a href="help.html">Help</a></p>
+                    <p class="msg_create"><a href="register.php">Create account</a></p>
+                    <p class="msg_forgot"><a href="Forgot.php">Forgot your password ?</a></p>
                 </div>
                 <div class="container_btn_envoyer">
-                <button type="submit" class="btn_envoyer" id="btn_login" style="margin-top: 20px;">LOG IN</button>
+                <button type="submit" class="btn_envoyer" id="btn_login" name="submit">LOG IN</button>
                 </div>
              </form>
         </div>

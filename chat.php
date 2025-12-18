@@ -13,46 +13,44 @@
         <div class="menu_close_module" id="menu_close_module">
             <i class='bxr  bx-x' style='color:#ffffff'></i> 
         </div>
-        <h2 id="module_msg">NEW TRANSACTIONS</h2>
+        <h2 id="module_msg">NEW MESSAGE</h2>
         <div class="module_customers_inputs">
             <div>
-                <input type="text" placeholder="Account Number 1 (From)">
+                <input type="text" placeholder=" Account Number">
             </div>
             <div>
-                <input type="email" placeholder="Account Number 2 (To)">
+                <input type="email" placeholder=" Subject">
             </div>
             <div>
-                <input type="tel" placeholder="Amount">
+                <input type="tel" placeholder="Your status (Facultatif)">
             </div>
-            <div>
-                <input type="text" placeholder="Advisor Name (Facultatif)">
-            </div>
+            
         </div>
         <div class="module_customers_btns">
             <button id="cancel_btn">Cancel</button>
-            <button class="add_btn" id="add_btn">Add</button>
+            <button class="add_btn" id="add_btn">Send</button>
         </div>
     </div>
     <div class="menu_content" id="menu_content">
         <h2>DASHBOARD</h2>
         <div class="menu_section">
-            <a href="home.html">DASHBOARD</a>
+            <a href="home.php">DASHBOARD</a>
             <i class='bxr  bx-apps' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="customers.html">CUSTOMERS</a>
+            <a href="customers.php">CUSTOMERS</a>
             <i class='bxr  bx-people-handshake' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="accounts.html">ACCOUNTS</a>
+            <a href="accounts.php">ACCOUNTS</a>
             <i class='bxr  bx-bank' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="transactions.html">TRANSACTIONS</a>
+            <a href="transactions.php">TRANSACTIONS</a>
             <i class='bxr  bx-arrow-right-left' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="chat.html">CHAT</a>
+            <a href="chat.php">CHAT</a>
             <i class='bxr  bx-discussion' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section last_item">
@@ -138,26 +136,27 @@
                     <i class='bxr  bx-spanner' style='color:#ffffff' id="settings_btn"></i> 
                 
                 <div class="main_container_head_p2_settings" id="container_settings">
-                    <button>DEPOSIT</button>
-                    <button>WITHDRAW</button>
+                    <button>ALL MESSAGES</button>
                     <button>STATISTIQUES</button>
+                    <button>RAPPORTS</button>
                 </div>
                 </div>
             </div>
+            
         </div>
         <div class="main_container_head2">
             <div class="main_container_head2_infos">
-                <p><span>32</span> TRANSACTIONS</p>
+                <p><span>20</span> MESSAGES</p>
             </div>
             <div class="main_container_head2_filter">
                     <div class="filter_container">
                         <div class="filter" >
-                            <button id="filter_btn" class="filter_btn">Filter by</button>
+                            <button id="filter_btn" class="filter_btn">Filter</button>
                         </div>
                         <div class="filter_menu" id="filter_menu">
-                            <button>Date</button>
-                            <button>Amount</button>
-                            <button>Account N°</button>
+                            <button>Last send</button>
+                            <button>First Send</button>
+                            <button>Status</button>
                         </div>
                     </div>
                 <div class="add_customer">
@@ -166,45 +165,55 @@
             </div>
         </div>
         <section class="transactions_section">
-            <table>
+            <table class="chat_table">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Account N°</th>
                         <th>Owners</th>
                         <th>Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Card</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="container_transaction">
+                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
                         <td>MLNB1235598</td>
                         <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                        <td>10236589.50 MAD</td>
-                        <td class="transaction_statuts">Done</td>
-                        <td>123658965478</td>
+                        <td>2024-12-20 10:10:10</td>
+                        
                     </tr>
                     <tr class="container_transaction">
+                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
                         <td>MLNB1235598</td>
                         <td>Mouad Saber</td>
                         <td>2024-12-20</td>
-                        <td>10236589.50 MAD</td>
-                        <td>Done</td>
-                        <td>123658965478</td>
                     </tr>
                     <tr class="container_transaction">
+                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
                         <td>MLNB1235598</td>
                         <td>Mouad Saber</td>
                         <td>2024-12-20</td>
-                        <td>10236589.50 MAD</td>
-                        <td>Done</td>
-                        <td>123658965478</td>
                     </tr>
                 </tbody>
 
             </table>
+            <div class="online_members_container">
+                <div class="online_members">
+                <div class="member">
+                    <img src="imgs/profile.png" alt="" style="width: 100%;">
+                    <div class="online_members_cercle"></div>
+                </div>
+                <div class="member">
+                    <img src="imgs/profile.png" alt="" style="width: 100%;">
+                    <div class="online_members_cercle"></div>
+                </div>
+                <div class="member">
+                    <img src="imgs/profile.png" alt="" style="width: 100%;">
+                    <div class="online_members_cercle"></div>
+                </div>
+
+                </div>
+            </div>
         </section>
     </main>
 

@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,23 +39,23 @@
     <div class="menu_content" id="menu_content">
         <h2>DASHBOARD</h2>
         <div class="menu_section">
-            <a href="home.html">DASHBOARD</a>
+            <a href="home.php">DASHBOARD</a>
             <i class='bxr  bx-apps' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="customers.html">CUSTOMERS</a>
+            <a href="customers.php">CUSTOMERS</a>
             <i class='bxr  bx-people-handshake' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="accounts.html">ACCOUNTS</a>
+            <a href="accounts.php">ACCOUNTS</a>
             <i class='bxr  bx-bank' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="transactions.html">TRANSACTIONS</a>
+            <a href="transactions.php">TRANSACTIONS</a>
             <i class='bxr  bx-arrow-right-left' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="chat.html">CHAT</a>
+            <a href="chat.php">CHAT</a>
             <i class='bxr  bx-discussion' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section last_item">

@@ -13,19 +13,19 @@
         <div class="menu_close_module" id="menu_close_module">
             <i class='bxr  bx-x' style='color:#ffffff'></i> 
         </div>
-        <h2 id="module_msg">NEW CUSTOMER</h2>
+        <h2 id="module_msg">NEW TRANSACTIONS</h2>
         <div class="module_customers_inputs">
             <div>
-                <input type="text" placeholder="Full name">
+                <input type="text" placeholder="Account Number 1 (From)">
             </div>
             <div>
-                <input type="email" placeholder="Email">
+                <input type="email" placeholder="Account Number 2 (To)">
             </div>
             <div>
-                <input type="tel" placeholder="Phone">
+                <input type="tel" placeholder="Amount">
             </div>
             <div>
-                <input type="text" placeholder="CIN">
+                <input type="text" placeholder="Advisor Name (Facultatif)">
             </div>
         </div>
         <div class="module_customers_btns">
@@ -36,23 +36,23 @@
     <div class="menu_content" id="menu_content">
         <h2>DASHBOARD</h2>
         <div class="menu_section">
-            <a href="home.html">DASHBOARD</a>
+            <a href="home.php">DASHBOARD</a>
             <i class='bxr  bx-apps' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="customers.html">CUSTOMERS</a>
+            <a href="customers.php">CUSTOMERS</a>
             <i class='bxr  bx-people-handshake' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="accounts.html">ACCOUNTS</a>
+            <a href="accounts.php">ACCOUNTS</a>
             <i class='bxr  bx-bank' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="transactions.html">TRANSACTIONS</a>
+            <a href="transactions.php">TRANSACTIONS</a>
             <i class='bxr  bx-arrow-right-left' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section">
-            <a href="chat.html">CHAT</a>
+            <a href="chat.php">CHAT</a>
             <i class='bxr  bx-discussion' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section last_item">
@@ -86,7 +86,7 @@
                 
             </div>
         </div>
-        <div class="header_right" id="header_right_logos_customers">
+        <div class="header_right full_screen">
             <div class="header_right_cercles">
                 <div class="header_right_cercle1"><div class="header_right_cercle2">         <div class="header_right_full_cercle"></div></div></div>
                 
@@ -138,26 +138,26 @@
                     <i class='bxr  bx-spanner' style='color:#ffffff' id="settings_btn"></i> 
                 
                 <div class="main_container_head_p2_settings" id="container_settings">
-                    <button>ALL CUSTOMERS</button>
+                    <button>DEPOSIT</button>
+                    <button>WITHDRAW</button>
                     <button>STATISTIQUES</button>
-                    <button>RAPPORTS</button>
                 </div>
                 </div>
             </div>
         </div>
         <div class="main_container_head2">
             <div class="main_container_head2_infos">
-                <p id="statistiques"><span>32</span> CUSTOMERS</p>
+                <p><span>32</span> TRANSACTIONS</p>
             </div>
             <div class="main_container_head2_filter">
                     <div class="filter_container">
-                        <div class="filter">
+                        <div class="filter" >
                             <button id="filter_btn" class="filter_btn">Filter by</button>
                         </div>
                         <div class="filter_menu" id="filter_menu">
-                            <button>Owners name</button>
-                            <button>Join Date</button>
-                            <button>Balance</button>
+                            <button>Date</button>
+                            <button>Amount</button>
+                            <button>Account N°</button>
                         </div>
                     </div>
                 <div class="add_customer">
@@ -165,154 +165,46 @@
                 </div>
             </div>
         </div>
-        <section class="customers_section">
-            <div class="customers_section_customer" id="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-phone' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-                <div class="details_btn">
-                    <i class='bxr  bx-dots-horizontal-rounded' style='color:#004E64'></i> 
-                </div>
-            </div>
-            <div class="customers_section_customer" >
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
-            <div class="customers_section_customer">
-                <div class="customers_section_customer_img">
-                    <img src="imgs/profile.png" alt="">
-                </div>
-                <div class="customers_section_customer_infos">
-                    <h3>Mouad Saber</h3>
-                    <p>NKL152365898755</p>
-                </div>
-                <div class="container_container_infos">
-                    <div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i>
-                            <p>mouadsabnv@gmail.com</p>
-                        </div>
-                        <div class="container_infos">
-                            <i class='bxr  bx-envelope' style='color:#004E64'></i> 
-                            <p>+212625364589</p>
-                        </div>
-                    </div>
-                    <div class="modify_infos">
-                        <i class='bxr  bx-pencil' style='color:#004E64'></i> 
-                    </div>
-                </div>
-            </div>
+        <section class="transactions_section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Account N°</th>
+                        <th>Owners</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Card</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="container_transaction">
+                        <td>MLNB1235598</td>
+                        <td>Mouad Saber</td>
+                        <td>2024-12-20</td>
+                        <td>10236589.50 MAD</td>
+                        <td class="transaction_statuts">Done</td>
+                        <td>123658965478</td>
+                    </tr>
+                    <tr class="container_transaction">
+                        <td>MLNB1235598</td>
+                        <td>Mouad Saber</td>
+                        <td>2024-12-20</td>
+                        <td>10236589.50 MAD</td>
+                        <td>Done</td>
+                        <td>123658965478</td>
+                    </tr>
+                    <tr class="container_transaction">
+                        <td>MLNB1235598</td>
+                        <td>Mouad Saber</td>
+                        <td>2024-12-20</td>
+                        <td>10236589.50 MAD</td>
+                        <td>Done</td>
+                        <td>123658965478</td>
+                    </tr>
+                </tbody>
+
+            </table>
         </section>
     </main>
 
@@ -357,5 +249,6 @@
     <script src="js/language.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/filter.js"></script>
+
 </body>
 </html>

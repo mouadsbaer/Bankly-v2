@@ -6,53 +6,10 @@
     <link rel="stylesheet" href="main.css">
     <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Bankly</title>
+    <title>Bankly- Create a user account</title>
 </head>
     
 <body >
-    <div class="menu_content" id="menu_content">
-        <h2>DASHBOARD</h2>
-        <div class="menu_section">
-            <a href="#">DASHBOARD</a>
-            <i class='bxr  bx-apps' style='color:#ffffff'></i> 
-        </div>
-        <div class="menu_section">
-            <a href="customers.html">CUSTOMERS</a>
-            <i class='bxr  bx-people-handshake' style='color:#ffffff'></i> 
-        </div>
-        <div class="menu_section">
-            <a href="accounts.html">ACCOUNTS</a>
-            <i class='bxr  bx-bank' style='color:#ffffff'></i> 
-        </div>
-        <div class="menu_section">
-            <a href="transactions.html">TRANSACTIONS</a>
-            <i class='bxr  bx-arrow-right-left' style='color:#ffffff'></i> 
-        </div>
-        <div class="menu_section">
-            <a href="chat.html">CHAT</a>
-            <i class='bxr  bx-discussion' style='color:#ffffff'></i> 
-        </div>
-        <div class="menu_section last_item">
-            <a>LOG OUT</a>
-            <i class='bxr  bx-arrow-out-right-square-half' style='color:#ffffff'></i> 
-        </div>
-        <div class="container_menu_lang_btn">
-            <div class="menu_bnts">
-            <div class="container" id="container_dark_mode">
-                <div class="cercle" id="content_dark_mode"></div>
-            </div>
-            <div class="langage_site" id="langage_site"><i class='bxr  bx-chevron-down' style='color:#ffffff'></i>  AR</div>
-        </div>
-        <div class="menu_language_btn" id="menu_language_btn">
-                <div>English</div>
-                <div>Francais</div>
-                <div>العربية</div>
-        </div>
-        </div>
-        <div class="menu_close" id="menu_close">
-            <i class='bxr  bx-x' style='color:#ffffff'></i> 
-        </div>
-    </div>
     <header>
     <div class="point">$</div>
         <div class="header_logo">
@@ -97,45 +54,65 @@
                 
             </div>
         </div>
-        <button class="menu" id="menu">
-            <i class='bxr  bx-menu'></i> 
-        </button>
+       
         
     </header>
     <section class="section_welcome">
         <div class="body_part1">
             <div class="body_part1_btn">
-                <h2 id="t"><a href="#">GET THE APP NOW</a></h2>
+                <h2 id="t">GET THE APP NOW</h2>
             </div>
             <h1 id="titre1" class="titre1">Financial <br> Banking Management <br>Solutions</h1>
         </div>
         <div class="body_part2">
             <div class="body_part2_btn">
-                <p><a href="#section_start">Over View</a></p>
+                <p><a href="#section_start"> Get Started</a></p>
                 <i class='bxr  bx-arrow-to-right' style='color:#ffffff'></i> 
-            </div> 
+            </div>
+            <div class="body_part2_stats">
+                <div class="body_part2_stat">
+                    <div class="body_part2_stat_icon"><i class='bxr  bx-department-store' style='color:#ffffff'></i></div>
+                    <div class="body_part2_stat_values">
+                        <h1>30 M+</h1>
+                        <p>Revenue Total</p>
+                    </div>
+                </div>
+                 <div class="body_part2_stat">
+                    <div class="body_part2_stat_icon"><i class='bxr  bx-registered' style='color:#ffffff'></i></div>
+                    <div class="body_part2_stat_values">
+                        <h1>370 K+</h1>
+                        <p>Registred Business</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="body_part2_parag">
+                <p style="line-height: 4vmin;">By Creating Your Account With Us <br> You Have The Opportunity To Bring Your Financial Dream To Reality <br> Contact Us If You Need any Help or Advice <br>We Are Here For You</p>
         </div>
     </section>
-    <section class="section_over_view">
-        <div class="item">
-            <p>Balance</p>
-            <i class='bxr  bx-arrow-to-right' style='color:#004E64'></i> 
-            <h2>235</h2>
+    <section class="section_account">
+        <div>
+        <div class="section_account_titles" id="section_start">
+        <h1 class="titre2">WELCOME</h1>
+        <h2 class="titre3">Create Your User Account</h2>
         </div>
-        <div class="item">
-            <p>Balance</p>
-            <i class='bxr  bx-arrow-to-right' style='color:#ffffff'></i> 
-            <h2>235</h2>
+        <div class="section_account_inputs">
+             <form action="#">
+                <div><input type="text" placeholder="Type your Full Name here" id="f_name_input"></div>
+                <div><input type="email" placeholder="Type your Email here" id="email_input"></div>
+                <div><input type="tel" placeholder="Type your Phone Number" id="phone_input"></div>
+                <div><input type="password" placeholder="Type your password here" id="password_input"></div>
+                <div><input type="password" placeholder="Confirm your password here" id="password_confirmation_input"></div>
+                <div class="section_account_inputs_msgs">
+                    <p class="msg_create"><a href="home.php">Already have an account? Log In</a></p>
+                    <p class="msg_forgot"><a href="help.php">Help</a></p>
+                </div>
+                <div class="container_btn_envoyer">
+                <button type="submit" class="btn_envoyer" id="btn_login" style="margin-top: 20px;">LOG IN</button>
+                </div>
+             </form>
         </div>
-        <div class="item">
-            <p>Balance</p>
-            <i class='bxr  bx-arrow-to-right' style='color:#004E64'></i> 
-            <h2>235</h2>
-        </div>
-        <div class="item">
-            <p>Balance</p>
-            <i class='bxr  bx-arrow-to-right' style='color:#ffffff'></i> 
-            <h2>235</h2>
         </div>
     </section>
     <footer>
