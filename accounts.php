@@ -16,7 +16,7 @@
     $accounts = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     mysqli_free_result($result2);
 
-    $account_number = $account_type  = '';
+    $account_number = $account_type  = $owner_name = $advisor_name = '';
     $errors = array('account_number' => '', 'account_type' => '', 'owner_name' => '', 'advisor_name'=> '');
             if(isset($_POST['add_account'])){
                 if(empty($_POST['account_number'])){
@@ -34,7 +34,7 @@
                 else{
                     $account_type = $_POST['account_type'];
                     if($account_type != 'saving' && $account_type != 'checking' && $account_type != 'business'){
-                        $errors['account_number'] = 'Chose a type account (saving, checking, business)';
+                        $errors['account_type'] = 'Chose a type account (saving, checking, business)';
                     }
                 }
                 if(empty($_POST['owner_name'])){
@@ -43,7 +43,7 @@
                 else{
                     $owner_name = $_POST['owner_name'];
                     if(!preg_match('/^[A-Za-z\s]+$/', $owner_name)){
-                        $errors['account_number'] = 'You should enter a full name (ex: Hean Deal)';
+                        $errors['owner_name'] = 'You should enter a full name (ex: Hean Deal)';
                     }
                 }
                 
@@ -85,6 +85,18 @@
                 }
             }
 
+            if(isset($_GET['id'])){
+                $id = mysqli_real_escape_string($connexion,$_GET['id']);
+                $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id'";
+                $result4 = mysqli_query($connexion, $rqt4);
+                $row = mysqli_fetch_assoc($result4);
+                if($row){
+                    $c_full_name = $row['full_name'];
+                    $c_email = $row['email'];
+                    $c_phone = $row['phone'];
+                    $cin = $row['CIN'];
+                }
+            }
             if(isset($_GET['id'])){
                 $id = mysqli_real_escape_string($connexion,$_GET['id']);
                 $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id'";
@@ -287,11 +299,11 @@
                     <p><?= $account['account_number'] ?></p>
                 </div>
                 <div class="container_container_infos">
-                    <button class="delete_account">
+                    <a href="accounts.php?id=<?php echo htmlspecialchars($account['account_id']); ?>" class="delete_account">
                         <p>Delete</p>
                         <i class='bxr  bx-trash-x'></i> 
                         
-                    </button>
+                    </a>
                     <a class="modify_infos" href="#">
                         <i class='bxr  bx-pencil' ></i> 
                     </a>
