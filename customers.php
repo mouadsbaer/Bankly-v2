@@ -2,15 +2,13 @@
     include 'connect/db_connexion.php';
 
 
-    $rqt1 = 'SELECT COUNT(*) FROM customers c
-            JOIN accounts a ON c.customer_id = a.customer_id;';
+    $rqt1 = 'SELECT COUNT(*) FROM customers ';
     $result1 = mysqli_query($connexion, $rqt1);
     $row = mysqli_fetch_row($result1);
     $customers_nbr = $row[0];
 
 
-    $rqt2 = 'SELECT c.customer_id,c.full_name, c.email, c.phone, a.account_number  FROM customers c
-            JOIN accounts a ON c.customer_id = a.customer_id; ';
+    $rqt2 = 'SELECT customer_id, full_name, email, phone, CIN  FROM customers ';
     $result2 = mysqli_query($connexion, $rqt2);
     $customers = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     mysqli_free_result($result2);
@@ -275,7 +273,7 @@
                 </div>
                 <div class="customers_section_customer_infos">
                     <h3><?= htmlspecialchars($customer['full_name']) ?></h3>
-                    <p><?= htmlspecialchars($customer['account_number']) ?></p>
+                    <p><?= htmlspecialchars($customer['CIN']) ?></p>
                 </div>
                 <div class="container_container_infos">
                     <div>
@@ -299,7 +297,7 @@
             
             <?php endforeach; ?>
             <?php else : ?>
-                <p class="no_customer"> No customers yet</p>
+                <p class="no_customer" style="font-weight: 3.5vmin"> No customers yet</p>
             <?php endif; ?>
             <?php mysqli_close($connexion); ?>
         </section>

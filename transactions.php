@@ -1,3 +1,57 @@
+<?php
+
+    include 'connect/db_connexion.php';
+
+
+    $rqt1 = "SELECT Count(*) FROM transactions";
+    $result1 = mysqli_query($connexion, $rqt1);
+    $row = mysqli_fetch_row($result1);
+    $transactions_nbr = $row[0];
+
+    $rqt2 = "SELECT * FROM transactions";
+    $result2 = mysqli_query($connexion, $rqt2);
+    $transactions = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    mysqli_free_result($result2);
+
+    $t_a_n1 = $t_a_n2 = $amount = $description = '';
+    $errors = array('account_number1'=>'','account_number2'=>'', 'amount'=>'');
+    if(isset($_POST['add_transaction'])){
+        if(empty($_POST['t_a_n1'])){
+            $errors['account_number1'] = 'The sender field should not be empty';
+        }
+        else{
+            $t_a_n1 = $_POST['t_a_n1'];
+            if(!preg_match('/[^A-Z][a-z0-9]{9}/', $t_a_n1)){
+                $errors['account_number1'] = 'Enter a valid account number (Ex : X123565258)';
+            }
+        }
+        if(empty($_POST['t_a_n2'])){
+            $errors['account_number2'] = 'The recipsionist field should not be empty';
+        }
+        else{
+            $t_a_n2 = $_POST['t_a_n2'];
+            if(!preg_match('/[^A-Z][a-z0-9]{9}/', $t_a_n1)){
+                $errors['account_number2'] = 'Enter a valid account number (Ex : X123565258)';
+            }
+        }
+
+        if(empty($_POST['t_amount'])){
+            $errors['amount'] = 'The amount field should not be empty';
+        }
+        else{
+            $amount = $_POST['amount'];
+        }
+        $description = $_POST['description'];
+    
+    
+    }
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,24 +68,30 @@
             <i class='bxr  bx-x' style='color:#ffffff'></i> 
         </div>
         <h2 id="module_msg">NEW TRANSACTIONS</h2>
-        <div class="module_customers_inputs">
+        <form action="transactions.php" method="post">
+            <div class="module_customers_inputs">
             <div>
-                <input type="text" placeholder="Account Number 1 (From)">
+                <input type="text" placeholder="Account Number 1 (From)" name="t_a_n1" value="<?php echo htmlspecialchars($t_a_n1) ?>">
+                <div style="color :red; font-size:1.5vmin; text-align:center;"><?php echo $errors['account_number1'] ?></div>
             </div>
             <div>
-                <input type="email" placeholder="Account Number 2 (To)">
+                <input type="email" placeholder="Account Number 2 (To)" name="t_a_n2" value="<?php echo htmlspecialchars($t_a_n2) ?>">
+                <div style="color :red; font-size:1.5vmin; text-align:center;"><?php echo $errors['account_number2'] ?></div>
             </div>
             <div>
-                <input type="tel" placeholder="Amount">
+                <input type="tel" placeholder="Amount" name="t_amount" value="<?php echo htmlspecialchars($amount) ?>">
+                <div style="color :red; font-size:1.5vmin; text-align:center;"><?php echo $errors['amount'] ?></div>
             </div>
             <div>
-                <input type="text" placeholder="Advisor Name (Facultatif)">
+                <input type="text" placeholder="Description (optional)" name="t_description" value="<?php echo htmlspecialchars($description) ?>">
+                <div style="color :red; font-size:1.5vmin; text-align:center;"><?php echo $errors['description'] ?></div>
             </div>
         </div>
         <div class="module_customers_btns">
             <button id="cancel_btn">Cancel</button>
-            <button class="add_btn" id="add_btn">Add</button>
+            <button class="add_btn" id="add_btn" name="add_transaction">Add</button>
         </div>
+        </form>
     </div>
     <div class="menu_content" id="menu_content">
         <h2>DASHBOARD</h2>
@@ -138,16 +198,16 @@
                     <i class='bxr  bx-spanner' style='color:#ffffff' id="settings_btn"></i> 
                 
                 <div class="main_container_head_p2_settings" id="container_settings">
-                    <button>DEPOSIT</button>
-                    <button>WITHDRAW</button>
-                    <button>STATISTIQUES</button>
+                    <button><a href="#">DEPOSIT</a></button>
+                    <button><a href="#">WITHDRAW</a></button>
+                    <button><a href="#">STATISTIQUES</a></button>
                 </div>
                 </div>
             </div>
         </div>
         <div class="main_container_head2">
             <div class="main_container_head2_infos">
-                <p><span>32</span> TRANSACTIONS</p>
+                <p><span><?php echo $transactions_nbr ?></span>  TRANSACTIONS</p>
             </div>
             <div class="main_container_head2_filter">
                     <div class="filter_container">
@@ -169,39 +229,30 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Account N°</th>
-                        <th>Owners</th>
+                        
+                        <th>From</th>
+                        <th>To</th>
                         <th>Date</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Card</th>
+                        <th>description</th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php if(!empty($transactions)): ?>
+                    <?php foreach($transactions as $transaction): ?>
                     <tr class="container_transaction">
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                        <td>10236589.50 MAD</td>
-                        <td class="transaction_statuts">Done</td>
-                        <td>123658965478</td>
+                        <td><?php echo $transaction['account_number'] ?></td>
+                        <td><?php echo $transaction['account_number2'] ?></td>
+                        <td><?php echo $transaction['tran_date'] ?></td>
+                        <td><?php echo $transaction['amount'] ?> MAD</td>
+                        <td class="transaction_statuts"><?php echo ($transaction['transaction_confirmed'] == 2) ?  'Done' :  'Depending' ?></td>
+                        <td><?php $transaction['description'] ?></td>
                     </tr>
-                    <tr class="container_transaction">
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                        <td>10236589.50 MAD</td>
-                        <td>Done</td>
-                        <td>123658965478</td>
-                    </tr>
-                    <tr class="container_transaction">
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                        <td>10236589.50 MAD</td>
-                        <td>Done</td>
-                        <td>123658965478</td>
-                    </tr>
+                <?php endforeach; ?>
+                <?php endif ;?>
+                    
+                    
                 </tbody>
 
             </table>

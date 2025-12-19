@@ -1,3 +1,22 @@
+<?php
+    include 'connect/db_connexion.php';
+
+    $rqt1 = "SELECT Count(*) FROM chat";
+    $result1 = mysqli_query($connexion, $rqt1);
+    $row = mysqli_fetch_row($result1);
+    $msgs_nbr = $row[0];
+
+    $rqt2 = "SELECT * FROM chat";
+    $result2 = mysqli_query($connexion , $rqt2);
+    $msgs = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    mysqli_free_result($result2);
+    
+    
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +25,7 @@
     <link rel="stylesheet" href="main.css">
     <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Bankly</title>
+    <title>Bankly - Chat</title>
 </head>
 <body>
     <div class="module_customers" id="module_customers">
@@ -16,13 +35,13 @@
         <h2 id="module_msg">NEW MESSAGE</h2>
         <div class="module_customers_inputs">
             <div>
-                <input type="text" placeholder=" Account Number">
+                <input type="text" placeholder=" Account Number" name="account_number">
             </div>
             <div>
-                <input type="email" placeholder=" Subject">
+                <input type="email" placeholder=" Subject" name="subject">
             </div>
             <div>
-                <input type="tel" placeholder="Your status (Facultatif)">
+                <input type="tel" placeholder="Message" name="msg">
             </div>
             
         </div>
@@ -146,7 +165,7 @@
         </div>
         <div class="main_container_head2">
             <div class="main_container_head2_infos">
-                <p><span>20</span> MESSAGES</p>
+                <p><span><?php echo $msgs_nbr ?></span> MESSAGES</p>
             </div>
             <div class="main_container_head2_filter">
                     <div class="filter_container">
@@ -170,30 +189,23 @@
                     <tr>
                         <th></th>
                         <th>Account N°</th>
-                        <th>Owners</th>
+                        <th>Sender</th>
+                        <th>Content</th>
                         <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="container_transaction">
+                    <?php if(!empty($msgs)): ?>
+                        <?php foreach($msgs as $msg): ?>
+                        <tr class="container_transaction">
                         <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
-                        <td>MLNB1235598</td>
+                        <td><?php echo $msgs['sender']?></td>
                         <td>Mouad Saber</td>
                         <td>2024-12-20 10:10:10</td>
-                        
                     </tr>
-                    <tr class="container_transaction">
-                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                    </tr>
-                    <tr class="container_transaction">
-                        <td style="width: 10%;"><img src="imgs/profile.png" alt="" style="width: 70%;"></td>
-                        <td>MLNB1235598</td>
-                        <td>Mouad Saber</td>
-                        <td>2024-12-20</td>
-                    </tr>
+                    <?php endforeach ?>
+                    <?php endif ?>
+                    
                 </tbody>
 
             </table>

@@ -16,7 +16,7 @@
     $accounts = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     mysqli_free_result($result2);
 
-    $account_number = $account_type = $owner_name = $advisor_name = '';
+    $account_number = $account_type  = '';
     $errors = array('account_number' => '', 'account_type' => '', 'owner_name' => '', 'advisor_name'=> '');
             if(isset($_POST['add_account'])){
                 if(empty($_POST['account_number'])){
@@ -24,7 +24,7 @@
                 }
                 else{
                     $account_number = $_POST['account_number'];
-                    if(!preg_match($account_number, '/^[A-Z][A-z0-9]{8}/$')){
+                    if(!preg_match('/^[A-Z][A-z0-9]{8}/', $account_number)){
                         $errors['account_number'] = 'The account number should not be in format correct';
                     }
                 }
@@ -42,16 +42,17 @@
                 }
                 else{
                     $owner_name = $_POST['owner_name'];
-                    if(!preg_match('/^[A-Za-z\s]+$/')){
+                    if(!preg_match('/^[A-Za-z\s]+$/', $owner_name)){
                         $errors['account_number'] = 'You should enter a full name (ex: Hean Deal)';
                     }
                 }
+                
                 if(empty($_POST['advisor_name'])){
                     $errors['advisor_name'] = 'The advisor field should not be empty';
                 }
                 else{
                     $advisor_name = $_POST['advisor_name'];
-                    if(!preg_match('/^[A-Za-z\s]+$/')){
+                    if(!preg_match('/^[A-Za-z\s]+$/' , $advisor_name)){
                         $errors['advisor_name'] = 'You should enter a full name (ex: Hean Deal)';
                     }
                 }
@@ -59,16 +60,20 @@
                 if(!array_filter($errors)){
                     $rqt3= "SELECT customer_id FROM customers WHERE full_name = '$owner_name'";
                     $result3 = mysqli_query($connexion, $rqt3);
-                    $row = mysqli_fetch_row($result3);
-                    $owner_id = row[0];
+                    $row1 = mysqli_fetch_row($result3);
+                    $owner_id = $row1[0];
                     
-                    $rqt4= "SELECT advisor_id FROM customers WHERE full_name = '$advisor_name'";
+                    $rqt4= "SELECT advisor_id FROM advisors WHERE full_name = '$advisor_name'";
                     $result4 = mysqli_query($connexion, $rqt4);
-                    $row = mysqli_fetch_row($result4);
-                    $advisor_id = row[0];
+                    $row2 = mysqli_fetch_row($result4);
+                    $advisor_id = $row2[0];
 
-
-                    $rqt5 = "INSERT INTO accounts(account_number,account_type, customer_id, advisor_id) values ('$account_number', '$account_type', '$owner_id','$advisor_id')";
+                    $account_nbr = mysqli_real_escape_string($connexion,$_POST['account_number']);
+                    $account_type = mysqli_real_escape_string($connexion, $_POST['account_type']);
+                    $owner_name = mysqli_real_escape_string($connexion, $_POST['owner_name']);
+                    $advisor_name = mysqli_real_escape_string($connexion, $_POST['advisor_name']);
+                    
+                    $rqt5 = "INSERT INTO accounts(account_number,account_type, customer_id, advisor_id) VALUES ('$account_nbr', '$account_type', '$owner_id','$advisor_id')";
 
                     if(mysqli_query($connexion, $rqt5)){
                         header("location: accounts.php");
@@ -106,7 +111,7 @@
                 <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['account_number'] ?></div>
             </div>
             <div>
-                <input type="email" placeholder="Account Type" name="account_type" >
+                <input type="text" placeholder="Account Type" name="account_type" >
                 <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['account_type'] ?></div>
             </div>
             <div>
@@ -261,8 +266,9 @@
                 <?php foreach($accounts as $account): ?>
             <div class="customers_section_customer" id="customers_section_customer">
                 <div class="customers_section_customer_img">
-                    <p class="account_type" id="account_type">CH</p>
-                </div>
+                    <p class="account_type" id="account_type">
+                        <?php echo ($account['account_type'] == 'savings') ? 'SV' : (($account['account_type'] == 'checking') ? 'CH' : 'BS'); ?>
+                    </p>                </div>
                 <div class="customers_section_customer_infos">
                     <h3><?= $account['full_name'] ?></h3>
                     <p><?= $account['account_number'] ?></p>
@@ -282,6 +288,9 @@
                 </div>
             </div>
             <?php endforeach ?>
+
+            <?php else:?>
+                <p style="text-align:center;">No accounts yet</p>
             <?php endif ;?>
 
         </section>
