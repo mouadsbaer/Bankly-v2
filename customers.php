@@ -83,6 +83,42 @@
             
             
         }
+        if(isset($_GET['id'])){
+            $id = mysqli_real_escape_string($connexion,$_GET['id']);
+            $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id'";
+            $result4 = mysqli_query($connexion, $rqt4);
+            if($result4 === false) {
+                die("Erreur de requête SELECT: " . mysqli_error($connexion));
+            }
+
+            $row = mysqli_fetch_assoc($result4);
+            if($row){
+                $c_full_name = $row['full_name'];
+                $c_email = $row['email'];
+                $c_phone = $row['phone'];
+                $cin = $row['CIN'];
+            }
+            else {
+                
+                die("Aucun client trouvé avec l'ID $id");
+            }
+
+            if(isset($_POST['update'])){
+                $f_name_updated = mysqli_real_escape_string($connexion, $_POST['c_full_name']);
+                $email_updated = mysqli_real_escape_string($connexion, $_POST['c_email']);
+                $phone_updated = mysqli_real_escape_string($connexion, $_POST['c_phone']);
+                $cin_updated = mysqli_real_escape_string($connexion, $_POST['c_CIN']);
+
+                $rqt5 = "UPDATE customers SET full_name = '$f_name_updated', email = '$email_updated', phone = '$phone_updated', CIN = '$cin_updated' WHERE customer_id= $id ";
+                
+                if(mysqli_query($connexion, $rqt5)){
+                    echo 'updated done';
+                }
+                else{
+                    die ('Update error' . mysqli_error($connexion));
+                }
+            }
+        }
 
 
     
@@ -128,7 +164,8 @@
         </div>
         <div class="module_customers_btns">
             <button type="reset" id="cancel_btn">Cancel</button>
-            <button class="add_btn" id="add_btn" name="submit">Add</button>
+            <button class="add_btn" id="add_btn" name="submit" style= <?php echo (isset($_GET['id'])) ? "display:none" : "display:block;"?>>Add</button>
+            <button class="add_btn" id="add_btn" name="update" style= <?php echo (isset($_GET['id'])) ? "display:block" : "display:none;"?>>Update</button>
         </div>
         </form>
     </div>
@@ -287,7 +324,7 @@
                         </div>
                     </div>
                     <div class="modify_infos">
-                        <a href="customers.php?id=<?= htmlspecialchars($customer['customer_id'] ) ?>"><i class='bxr  bx-pencil' style='color:#004E64'></i> </a>
+                        <a href="customers.php?id=<?= htmlspecialchars($customer['customer_id'] ) ?>"><i class='bxr  bx-pencil' style='color:#004E64' ></i> </a>
                     </div>
                 </div>
                 <div class="details_btn">
@@ -299,7 +336,7 @@
             <?php else : ?>
                 <p class="no_customer" style="font-weight: 3.5vmin"> No customers yet</p>
             <?php endif; ?>
-            <?php mysqli_close($connexion); ?>
+            
         </section>
     </main>
 

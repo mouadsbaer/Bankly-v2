@@ -14,7 +14,7 @@
     mysqli_free_result($result2);
 
     $t_a_n1 = $t_a_n2 = $amount = $description = '';
-    $errors = array('account_number1'=>'','account_number2'=>'', 'amount'=>'');
+    $errors = array('account_number1'=>'','account_number2'=>'', 'amount'=>'', 'description'=> '');
     if(isset($_POST['add_transaction'])){
         if(empty($_POST['t_a_n1'])){
             $errors['account_number1'] = 'The sender field should not be empty';
@@ -39,12 +39,33 @@
             $errors['amount'] = 'The amount field should not be empty';
         }
         else{
-            $amount = $_POST['amount'];
+            $amount = $_POST['t_amount'];
         }
-        $description = $_POST['description'];
+        if(empty($_POST['description'])){
+            $errors['description'] = 'This field should contain your name as a sign at least';
+        }
+        else{
+            $description = $_POST['description'];
+        }
     
-    
+        if(!array_filter($errors)){
+            $amount = mysqli_real_escape_string($connexion, $_POST['t_amount']);
+        $t_a_n1 = mysqli_real_escape_string($connexion, $_POST['t_a_n1']);
+        $t_a_n2 = mysqli_real_escape_string($connexion, $_POST['t_a_n2']);
+        $description = mysqli_real_escape_string($connexion, $_POST['t_description']);
+
+        $rqt3 = "INSERT INTO transactions(amount, account_number, account_number2,`description`) VALUES('$amount','$t_a_n1', '$t_a_n2', '$description') ";
+        if(mysqli_query($connexion, $rqt3)){
+            header("location: transactions.php");
+            exit;
+        }
+        else{
+            echo 'Insertion error'. mysqli_error($connexion);
+        }
+        }
     }
+    
+
 
 
 ?>
@@ -75,7 +96,7 @@
                 <div style="color :red; font-size:1.5vmin; text-align:center;"><?php echo $errors['account_number1'] ?></div>
             </div>
             <div>
-                <input type="email" placeholder="Account Number 2 (To)" name="t_a_n2" value="<?php echo htmlspecialchars($t_a_n2) ?>">
+                <input type="text" placeholder="Account Number 2 (To)" name="t_a_n2" value="<?php echo htmlspecialchars($t_a_n2) ?>">
                 <div style="color :red; font-size:1.5vmin; text-align:center;"><?php echo $errors['account_number2'] ?></div>
             </div>
             <div>
@@ -198,9 +219,9 @@
                     <i class='bxr  bx-spanner' style='color:#ffffff' id="settings_btn"></i> 
                 
                 <div class="main_container_head_p2_settings" id="container_settings">
-                    <button><a href="#">DEPOSIT</a></button>
-                    <button><a href="#">WITHDRAW</a></button>
-                    <button><a href="#">STATISTIQUES</a></button>
+                    <button><a href="customers.php?action=deposit">DEPOSIT</a></button>
+                    <button><a href="customers.php?action=withdraw">WITHDRAW</a></button>
+                    <button><a href="customers.php?action=statistiques">STATISTIQUES</a></button>
                 </div>
                 </div>
             </div>
@@ -247,11 +268,11 @@
                         <td><?php echo $transaction['tran_date'] ?></td>
                         <td><?php echo $transaction['amount'] ?> MAD</td>
                         <td class="transaction_statuts"><?php echo ($transaction['transaction_confirmed'] == 2) ?  'Done' :  'Depending' ?></td>
-                        <td><?php $transaction['description'] ?></td>
+                        <td><?php echo $transaction['description'] ?></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php endif ;?>
-                    
+               <?php mysqli_close($connexion); ?>
                     
                 </tbody>
 

@@ -9,6 +9,7 @@ show_module_customers.addEventListener('click', ()=>{
     module_customers.style.display = 'block';
 });
 
+
 menu_close_module.addEventListener('click', ()=>{
   if(module_customers.style.display === 'block'){
     module_customers.style.display = 'none'

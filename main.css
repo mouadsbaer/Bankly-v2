@@ -927,18 +927,17 @@ body.dark_mode{
 .transactions_section table th{
     
     font-weight: 600;
-    font-size: 2.5vmin;
+    font-size: 2.1vmin;
     text-align: left;
     padding: 0px 5px;
     padding-bottom: 20px;
-    color: #023c4d;
+    color: black;
 }
 .transactions_section table td{
    
    font-weight: 600;
     color: #004E64;
-    font-size: 2vmin;
-    padding: 15px 50px;
+    font-size: 1.6vmin;    padding: 15px 50px;
     border-bottom: 2px solid #004E64;
     
 }
