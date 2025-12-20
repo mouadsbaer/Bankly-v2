@@ -98,6 +98,7 @@
                 
                 
             }
+
             
 
 ?>
@@ -294,7 +295,7 @@
                         <i class='bxr  bx-trash-x'></i> 
                         
                     </a>
-                    <a class="modify_infos" href="#">
+                    <a class="modify_infos" href="accounts.php?idupdate= <?php echo htmlspecialchars($account['account_id']); ?>">
                         <i class='bxr  bx-pencil' ></i> 
                     </a>
                 </div>

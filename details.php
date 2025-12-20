@@ -8,117 +8,19 @@
     $customers_nbr = $row[0];
 
 
-    $rqt2 = 'SELECT customer_id, full_name, email, phone, CIN  FROM customers ';
+    $id_details = $_GET['id'];
+    $rqt2 = "SELECT customer_id, full_name, email, phone, CIN  FROM customers Where customer_id = '$id_details' ";
     $result2 = mysqli_query($connexion, $rqt2);
     $customers = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+    print_r($customers);
     mysqli_free_result($result2);
 
-    $c_full_name = $c_email = $c_phone = $cin = '';
-    $errors = array('full_name' => '', 'c_email' => '', 'phone'=> '', 'cin' => '');
-        if(isset($_POST['submit'])){
-            if(empty($_POST['c_full_name'])){
-                $errors['full_name'] = 'The name field should not be empty';
-            }
-            else{
-                $c_full_name = $_POST['c_full_name'];
-                if(!preg_match('/[A-Za-z\s]+$/' ,$c_full_name)){
-                    $errors['full_name'] = 'this field could contain just letters !';
-                }
-                elseif(str_word_count($c_full_name) < 2){
-                    $errors['full_name'] = 'You should enter your full name (ex: Jean Dupont)';
-                }
-            }
-            if(empty($_POST['c_email'])){
-                $errors['c_email'] = 'The email field should not be empty';
-            }
-            else{
-                $c_email = $_POST['c_email'];
-                if(!filter_var($c_email, FILTER_VALIDATE_EMAIL)){
-                    $errors['c_email'] = 'this field should be in correct format !';
-                }
-            }
-            if(empty($_POST['c_phone'])){
-                $errors['phone'] = 'The phone field should not be empty';
-            }
-            else{
-                $c_phone = $_POST['c_phone'];
-                if(!preg_match('/^(0|\+212)[5-7][0-9]{8}$/', $c_phone)){
-                    $errors['phone'] = 'Format: 05XXXXXXXX ou +2125XXXXXXXX';
-                }
-            }
-            if(empty($_POST['c_CIN'])){
-                $errors['cin'] = 'The CIN field should not be empty';
-            }
-            else{
-                $cin = $_POST['c_CIN'];
-                if(!preg_match('/^[A-Z][0-9]{6}$/', $cin)){
-                    $errors['cin'] = 'this field should be in correct format !';
-                }
-                elseif(strlen($cin) < 7 ){
-                    $errors['cin'] = 'this field should be 7 letters at least !';
+    $c_full_name = $customers['full_name'];
+    $c_email = $customers['email'];
+    $c_phone = $customers['phone'];
+    $cin = $customers['CIN'];
 
-                }
-            }
-            if(!array_filter($errors)){
-
-
-                    $full_name = mysqli_real_escape_string($connexion, $_POST['c_full_name']); 
-                    $email = mysqli_real_escape_string($connexion, $_POST['c_email']); 
-                    $phone = mysqli_real_escape_string($connexion, $_POST['c_phone']); 
-                    $cin = mysqli_real_escape_string($connexion, $_POST['c_CIN']); 
-
-                    $rqt3 = "INSERT INTO customers(full_name,email, phone, CIN) VALUES('$full_name', '$email', '$phone', '$cin')";
-
-                    if(mysqli_query($connexion, $rqt3)){
-                        header("location: customers.php");
-                        exit;
-                    }
-                    else{
-                        echo 'error produced' . mysqli_error($connexion);
-                    }
-                   
-                
-            }
-            
-            
-            
-        }
-        if(isset($_GET['id'])){
-            $id_to_update = mysqli_real_escape_string($connexion,$_GET['id']);
-            $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id_to_update'";
-            $result4 = mysqli_query($connexion, $rqt4);
-            if(!$result4) {
-                die("Erreur de requête SELECT: " . mysqli_error($connexion));
-            }
-
-            $row = mysqli_fetch_assoc($result4);
-            if($row){
-                $c_full_name = $row['full_name'];
-                $c_email = $row['email'];
-                $c_phone = $row['phone'];
-                $cin = $row['CIN'];
-            }
-            else{
-                die("Aucun client trouvé avec l'ID $id_to_update");
-            }
-            if(isset($_POST['update'])){
-                $c_full_name_updated = mysqli_real_escape_string($connexion, $c_full_name);
-                $c_email_updated = mysqli_real_escape_string($connexion, $c_email);
-                $c_phone_updated = mysqli_real_escape_string($connexion, $c_phone);
-                $c_cin_updated = mysqli_real_escape_string($connexion, $cin);
-
-                $rqt5 = "UPDATE customers SET full_name = '$c_full_name_updated', email = '$c_email_updated', phone = '$c_phone_updated', CIN = '$c_cin_updated' WHERE customer_id = $id_to_update";
-
-                if(mysqli_query($connexion, $rqt5)){
-                    echo 'Customer with id ' . $id_to_update . 'is updated succeffully !';
-                }
-                else{
-                    die('Updating Error :'. mysqli_error($connexion));
-                }
-            }
-            
-        }
-        
+    
 
 
     
@@ -138,28 +40,21 @@
     <title>Bankly</title>
 </head>
 <body>
-    <div class="module_customers" id="module_customers">
-        <div class="menu_close_module" id="menu_close_module">
-            <i class='bxr  bx-x' style='color:#ffffff'></i> 
-        </div>
-        <h2 id="module_msg" style="margin-bottom : 0">NEW CUSTOMER</h2>
+    <div class="module_customers" id="module_customers" style="display : block;">
+        <h2 id="module_msg" style="margin-bottom : 0">CUSTOMER </h2>
         <form action="customers.php" method="post">
             <div class="module_customers_inputs">
             <div>
-                <input type="text" placeholder="Full name" name="c_full_name" value="<?php echo $c_full_name ?>">
-                <div style="color:red; font-size:1.7vmin; text-align:center;padding:0"><?php echo $errors['full_name'] ?></div>
+                <input type="text" placeholder="Full name" name="c_full_name" value="<?php echo $c_full_name ?>" readonly>
             </div>
             <div>
-                <input type="text" placeholder="Email" name="c_email" value="<?php echo $c_email ?>">
-                <div style="color:red; font-size:1.7vmin; text-align:center;padding:0"><?php echo $errors['c_email'] ?></div>
+                <input type="text" placeholder="Email" name="c_email" value="<?php echo $c_email ?>" readonly>
             </div>
             <div>
-                <input type="tel" placeholder="Phone" name="c_phone" value="<?php echo $c_phone ?>">
-                <div style="color:red; font-size:1.7vmin; text-align:center;padding:0"><?php echo $errors['phone'] ?></div>
+                <input type="tel" placeholder="Phone" name="c_phone" value="<?php echo $c_phone ?>" readonly>
             </div>
             <div>
-                <input type="text" placeholder="CIN" name="c_CIN" value="<?php echo $cin ?>">
-                <div style="color:red; font-size:1.7vmin; text-align:center;padding:0"><?php echo $errors['cin'] ?></div>
+                <input type="text" placeholder="CIN" name="c_CIN" value="<?php echo $cin ?>" readonly>
             </div>
         </div>
         <div class="module_customers_btns">
@@ -327,11 +222,9 @@
                         <a href="customers.php?id=<?= htmlspecialchars($customer['customer_id'] ); ?>"><i class='bxr  bx-pencil' style='color:#004E64' ></i> </a>
                     </div>
                 </div>
-                <form action="details.php" method="get">
-                    <a class="details_btn" href="details.php?id= <?= htmlspecialchars($customer['customer_id'] ); ?>">
-                        <i class='bxr  bx-dots-horizontal-rounded' style='color:#004E64'></i> 
-                    </a>
-                </form>
+                <a class="details_btn" href="details.php?id= <?= htmlspecialchars($customer['customer_id'] ); ?>">
+                    <i class='bxr  bx-dots-horizontal-rounded' style='color:#004E64'></i> 
+                </a>
             </div>
             
             <?php endforeach; ?>
