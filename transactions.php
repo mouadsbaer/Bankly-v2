@@ -41,15 +41,15 @@
         else{
             $amount = $_POST['t_amount'];
         }
-        if(empty($_POST['description'])){
+        if(empty($_POST['t_description'])){
             $errors['description'] = 'This field should contain your name as a sign at least';
         }
         else{
-            $description = $_POST['description'];
+            $description = $_POST['t_description'];
         }
     
         if(!array_filter($errors)){
-            $amount = mysqli_real_escape_string($connexion, $_POST['t_amount']);
+        $amount = mysqli_real_escape_string($connexion, $_POST['t_amount']);
         $t_a_n1 = mysqli_real_escape_string($connexion, $_POST['t_a_n1']);
         $t_a_n2 = mysqli_real_escape_string($connexion, $_POST['t_a_n2']);
         $description = mysqli_real_escape_string($connexion, $_POST['t_description']);
@@ -84,7 +84,7 @@
     <title>Bankly</title>
 </head>
 <body>
-    <div class="module_customers" id="module_customers">
+    <div class="module_customers" id="module_customers" >
         <div class="menu_close_module" id="menu_close_module">
             <i class='bxr  bx-x' style='color:#ffffff'></i> 
         </div>
@@ -219,9 +219,9 @@
                     <i class='bxr  bx-spanner' style='color:#ffffff' id="settings_btn"></i> 
                 
                 <div class="main_container_head_p2_settings" id="container_settings">
-                    <button><a href="customers.php?action=deposit">DEPOSIT</a></button>
-                    <button><a href="customers.php?action=withdraw">WITHDRAW</a></button>
-                    <button><a href="customers.php?action=statistiques">STATISTIQUES</a></button>
+                    <button><a href="tran_direct.php?action=deposit">DEPOSIT</a></button>
+                    <button><a href="tran_direct.php?action=withdraw">WITHDRAW</a></button>
+                    <button><a href="tran_direct.php?action=statistiques">STATISTIQUES</a></button>
                 </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@
                         </div>
                     </div>
                 <div class="add_customer">
-                    <button id="show_module_customers">Send a Messsage</button>
+                    <button id="show_module_customers" style="width=fit-content; ">NEW TRANSACTION</button>
                 </div>
             </div>
         </div>

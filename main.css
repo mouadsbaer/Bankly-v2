@@ -929,17 +929,31 @@ body.dark_mode{
     font-weight: 600;
     font-size: 2.1vmin;
     text-align: left;
-    padding: 0px 5px;
+    padding: 5px 50px;
     padding-bottom: 20px;
-    color: black;
+    color: #004E64;
 }
 .transactions_section table td{
-   
+    text-align: left;
    font-weight: 600;
-    color: #004E64;
-    font-size: 1.6vmin;    padding: 15px 50px;
+    color: black;
+
+    font-size: 1.6vmin;    
+    padding: 15px 50px;
     border-bottom: 2px solid #004E64;
     
+}
+.transactions_section table td a{
+    background: #004E64;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: .5s;
+}
+.transactions_section table td a:hover{
+    background: #fffefe;
+    color: #004E64;
+    border: 1px solid #004E64;
 }
 #module_msg{
     text-align: center;

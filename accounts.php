@@ -273,7 +273,7 @@
                         </div>
                     </div>
                 <div class="add_customer">
-                    <button id="show_module_customers">Send a Messsage</button>
+                    <button id="show_module_customers">NEW ACCOUNT</button>
                 </div>
             </div>
         </div>
