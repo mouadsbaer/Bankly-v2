@@ -87,28 +87,18 @@
 
             if(isset($_GET['id'])){
                 $id = mysqli_real_escape_string($connexion,$_GET['id']);
-                $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id'";
-                $result4 = mysqli_query($connexion, $rqt4);
-                $row = mysqli_fetch_assoc($result4);
-                if($row){
-                    $c_full_name = $row['full_name'];
-                    $c_email = $row['email'];
-                    $c_phone = $row['phone'];
-                    $cin = $row['CIN'];
+                $rqt4 = "DELETE FROM accounts WHERE account_id = '$id'";
+                if(mysqli_query($connexion, $rqt4)){
+                    echo 'account with id ' .$id .'deleted succefully';
+                    header("location: accounts.php");
                 }
-            }
-            if(isset($_GET['id'])){
-                $id = mysqli_real_escape_string($connexion,$_GET['id']);
-                $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id'";
-                $result4 = mysqli_query($connexion, $rqt4);
-                $row = mysqli_fetch_assoc($result4);
-                if($row){
-                    $c_full_name = $row['full_name'];
-                    $c_email = $row['email'];
-                    $c_phone = $row['phone'];
-                    $cin = $row['CIN'];
+                else{
+                    die ('Delete error!'. mysqli_error($connexion));
                 }
+                
+                
             }
+            
 
 ?>
 
