@@ -13,6 +13,30 @@
     $customers = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     mysqli_free_result($result2);
 
+    if(isset($_POST['owners']) || isset($_POST['date']) || isset($_POST['balance'])){
+        if(isset($_POST['owners'])){
+            $rqt7 = 'SELECT customer_id, full_name, email, phone, CIN FROM customers ORDER BY full_name';
+            $result7 = mysqli_query($connexion, $rqt7);
+            $customers = mysqli_fetch_all($result7, MYSQLI_ASSOC);
+            mysqli_free_result($result7);
+            header("location: customers.php");
+        }
+        if(isset($_POST['date'])){
+            $rqt8 = 'SELECT customer_id, full_name, email, phone, CIN , added_at FROM customers ORDER BY added_at';
+            $result8 = mysqli_query($connexion, $rqt8);
+            $customers = mysqli_fetch_all($result8, MYSQLI_ASSOC);
+            mysqli_free_result($result8);
+            header("location: customers.php");
+        }
+        if(isset($_POST['balance'])){
+            $rqt9 = 'SELECT c.customer_id, c.full_name, c.email, c.phone, c.CIN , a.balance FROM customers c JOIN accounts a ON c.customer_id = a.customer_id ORDER BY a.balance DESC';
+            $result9 = mysqli_query($connexion, $rqt9);
+            $customers = mysqli_fetch_all($result9, MYSQLI_ASSOC);
+            mysqli_free_result($result9);
+            header("location: customers.php");
+        }
+
+    }
     $c_full_name = $c_email = $c_phone = $cin = '';
     $errors = array('full_name' => '', 'c_email' => '', 'phone'=> '', 'cin' => '');
         if(isset($_POST['submit']) && !isset($_GET['id'])){
