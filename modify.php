@@ -83,7 +83,6 @@
             
             
         }
-        // récupération de l'id de client à modifier :
         if(isset($_GET['id'])){
             $id_to_update = mysqli_real_escape_string($connexion,$_GET['id']);
             $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id_to_update'";
@@ -103,7 +102,6 @@
                 die("Aucun client trouvé avec l'ID $id_to_update");
             }
 
-            // Validation de formulaire au cas de mise à jour des informations :
             if(isset($_POST['update'])){
                 if(empty($_POST['c_full_name'])){
                 $errors['full_name'] = 'The name field should not be empty';
@@ -148,41 +146,28 @@
 
                 }
             }
-            // Requéte de mise à jour d'informations d'un client :
-                $rqt5 = "UPDATE customers SET full_name = '$c_full_name_updated', email = '$c_email_updated', phone = '$c_phone_updated', CIN = '$cin_updated' WHERE customer_id = $id_to_update";
+                $rqt5 = "UPDATE customers SET full_name = '$c_full_name_updated', email = '$c_email_updated', phone = '$c_phone_updated', CIN = '$c_cin_updated' WHERE customer_id = $id_to_update";
 
                 if(mysqli_query($connexion, $rqt5)){
+                   
+               
                 $rqt4 = "SELECT * FROM customers WHERE customer_id = '$id_to_update'";
                 $result4 = mysqli_query($connexion, $rqt4);
                 $row = mysqli_fetch_assoc($result4);
                 
-                // Réinisialisation de variables d'affichage aprés le mise à jour :
+                
                 $c_full_name = $row['full_name'];
                 $c_email = $row['email'];
                 $c_phone = $row['phone'];
                 $cin = $row['CIN'];
-                // Rediriction vers la page de client :
+
                 header("location: customers.php");
                 }
-                // si la requéte ne marche pas :
                 else{
                     die('Updating Error :'. mysqli_error($connexion));
                 }
             }
             
-        }
-        if(isset($_GET['id_to_delete'])){
-            $id_to_delete = $_GET['id_to_delete'];
-            $rqt6 = "DELETE FROM customers WHERE customer_id = '$id_to_delete'";
-
-            if(mysqli_query($connexion, $rqt6)){
-                header('location: customers.php');
-                exit;
-            }
-            else{
-                die('Delete Erro :'  . mysqli_error($connexion));
-            }
-
         }
         
 
@@ -209,7 +194,7 @@
             <i class='bxr  bx-x' style='color:#ffffff'></i> 
         </div>
         <h2 id="module_msg" style="margin-bottom : 0">NEW CUSTOMER</h2>
-        <form action="customers.php?<?php echo (isset($_GET['id'])) ? 'id=' . $_GET['id'] : '' ?>" method="post">
+        <form action="customers.php" method="post">
             <div class="module_customers_inputs">
             <div>
                 <input type="text" placeholder="Full name" name="c_full_name" value="<?php echo $c_full_name ?>">
@@ -356,11 +341,11 @@
                         <div class="filter">
                             <button id="filter_btn" class="filter_btn">Filter by</button>
                         </div>
-                        <form class="filter_menu" id="filter_menu" action="customers.php" method="post">
-                            <button name="owners">Owners name</button>
-                            <button name="date">Join Date</button>
-                            <button name="balance">Balance</button>
-                        </form>
+                        <div class="filter_menu" id="filter_menu">
+                            <button>Owners name</button>
+                            <button>Join Date</button>
+                            <button>Balance</button>
+                        </div>
                     </div>
                 <div class="add_customer">
                     <button id="show_module_customers">NEW CUSTOMER</button>
@@ -392,9 +377,6 @@
                     <div class="modify_infos">
                         <a href="customers.php?id=<?= htmlspecialchars($customer['customer_id'] ); ?>"><i class='bxr  bx-pencil' style='color:#004E64' ></i> </a>
                     </div>
-                    <a href="customers.php?id_to_delete=<?php echo htmlspecialchars($customer['customer_id']); ?>" class="delete_account" style="width: fit-content; font-style:2vmin">
-                        <i class='bxr  bx-trash-x'></i> 
-                    </a>
                 </div>
                 <form action="details.php" method="get">
                     <a class="details_btn" href="details.php?id= <?= htmlspecialchars($customer['customer_id'] ); ?>">
