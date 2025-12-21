@@ -13,7 +13,8 @@
     $customers = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     mysqli_free_result($result2);
 
-    if(isset($_POST['owners']) || isset($_POST['date']) || isset($_POST['balance'])){
+   
+        // Fonctionnalités de filtrage :
         if(isset($_POST['owners'])){
             $rqt7 = 'SELECT customer_id, full_name, email, phone, CIN FROM customers ORDER BY full_name';
             $result7 = mysqli_query($connexion, $rqt7);
@@ -35,8 +36,9 @@
             mysqli_free_result($result9);
             header("location: customers.php");
         }
-
-    }
+        // fin de filtrage
+    
+        
     $c_full_name = $c_email = $c_phone = $cin = '';
     $errors = array('full_name' => '', 'c_email' => '', 'phone'=> '', 'cin' => '');
         if(isset($_POST['submit']) && !isset($_GET['id'])){

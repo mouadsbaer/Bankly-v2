@@ -1,24 +1,22 @@
 <?php
-
-    //<?php ($account['full_name'] == 'saving') ? 'SV' : ($account['full_name'] == 'chacking') 'CH' : 'BS' 
-    
-
     include 'connect/db_connexion.php';
 
+    // Requéte pour calculer le nombre de comptes dans la base de données :
     $rqt1 = "SELECT Count(*) FROM accounts";
     $result1 = mysqli_query($connexion, $rqt1);
     $row = mysqli_fetch_row($result1);
     $accounts_nbr = $row[0];
 
-
+    // Requéte pour afficher tous les comptes enregistrés dans la base de données :
     $rqt2 = "SELECT a.account_id, a.account_number, c.full_name, a.account_type FROM accounts a JOIN customers c ON a.customer_id = c.customer_id";
     $result2 = mysqli_query($connexion, $rqt2);
     $accounts = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     mysqli_free_result($result2);
 
+    // Validaton de formulaire avant de l'envoyer :
     $account_number = $account_type  = $owner_name = $advisor_name = '';
     $errors = array('account_number' => '', 'account_type' => '', 'owner_name' => '', 'advisor_name'=> '');
-            if(isset($_POST['add_account'])){
+            if(isset($_POST['add_account']) && !isset($_POST['update_account'])){
                 if(empty($_POST['account_number'])){
                     $errors['account_number'] = 'The account number field should not be empty';
                 }
@@ -57,6 +55,7 @@
                     }
                 }
 
+
                 if(!array_filter($errors)){
                     $rqt3= "SELECT customer_id FROM customers WHERE full_name = '$owner_name'";
                     $result3 = mysqli_query($connexion, $rqt3);
@@ -85,6 +84,7 @@
                 }
             }
 
+            // Fonctionnalité de suppression d'un compte :
             if(isset($_GET['id'])){
                 $id = mysqli_real_escape_string($connexion,$_GET['id']);
                 $rqt4 = "DELETE FROM accounts WHERE account_id = '$id'";
@@ -95,12 +95,40 @@
                 else{
                     die ('Delete error!'. mysqli_error($connexion));
                 }
-                
-                
+            }
+            // Récupération des informations de comptes à modifier et les mettres dans les champs de formulaire :
+            if(isset($_GET['id_update'])){
+                $id_to_update = mysqli_real_escape_string($connexion, $_GET['id_update']);
+                $rqt5 = "SELECT a.account_id, a.account_number, c.full_name, a.account_type FROM accounts a JOIN customers c ON a.customer_id = c.customer_id";
+                $result5 = mysqli_query($connexion, $rqt5);
+                $row = mysqli_fetch_assoc($result5);
+                if(!$result5){
+                    die('Error : ' . mysqli_error($connexion));
+                }
+                if($row){
+                    $account_number = $row['account_number'];
+                    $account_type = $row['account_type'];
+                    $owner_name = $row['full_name'];
+                    $advisor_name = '';
+                }
+                else{
+                    die('Error : '. mysqli_error($connexion));
+                }
             }
 
-            
-
+            // Fonctionnalité de mise à jour des informations de comptes :
+            if(isset($_POST['update_account'])){
+                    $account_nbr_updated = mysqli_real_escape_string($connexion,$_POST['account_number']);
+                    $account_type_updated = mysqli_real_escape_string($connexion, $_POST['account_type']);
+                    $rqt8 = "UPDATE accounts SET account_number = '$account_nbr_updated',account_type = '$account_type_updated'";
+                    if(mysqli_query($connexion, $rqt8)){
+                        header("location: accounts.php");
+                        exit;
+                    }
+                    else{
+                        die('Updating Error : '. mysqli_error($connexion));
+                    }
+            }
 ?>
 
 
@@ -127,21 +155,22 @@
                 <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['account_number'] ?></div>
             </div>
             <div>
-                <input type="text" placeholder="Account Type" name="account_type" >
+                <input type="text" placeholder="Account Type" name="account_type"  value="<?php echo $account_type ?>">
                 <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['account_type'] ?></div>
             </div>
             <div>
-                <input type="tel" placeholder="Owner Name" name="owner_name" value="<?php echo $owner_name?>">
+                <input type="tel" placeholder="Owner Name" name="owner_name" value="<?php echo $owner_name?>" <?php echo (isset($_GET['id_update'])) ? 'readonly' : '' ?>>
                 <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['owner_name'] ?></div>
             </div>
             <div>
-                <input type="text" placeholder="Advisor Name (Facultatif)" name="advisor_name" value="<?php echo $advisor_name ?>">
+                <input type="text" placeholder="Advisor Name (Facultatif)" name="advisor_name" value="<?php echo $advisor_name ?>" <?php echo (isset($_GET['id_update'])) ? 'readonly' : '' ?>>
                 <div style="color:red; font-size:1.7vmin ;text-align:center"><?= $errors['advisor_name'] ?></div>
             </div>
         </div>
         <div class="module_customers_btns">
             <button id="cancel_btn">Cancel</button>
-            <button class="add_btn" id="add_btn" name="add_account">Add</button>
+            <button class="add_btn" id="add_btn" name="add_account" style="<?php echo (isset($_GET['id_update'])) ? 'display:none' : 'display:block' ?>">Add</button>
+            <button class="add_btn" id="add_btn" name="update_account" style="<?php echo isset($_GET['id_update']) ? 'display:block' : 'display:none' ?>">Update</button>
         </div>
         </form>
     </div>
@@ -295,7 +324,7 @@
                         <i class='bxr  bx-trash-x'></i> 
                         
                     </a>
-                    <a class="modify_infos" href="accounts.php?idupdate= <?php echo htmlspecialchars($account['account_id']); ?>">
+                    <a class="modify_infos" href="accounts.php?id_update=<?php echo htmlspecialchars($account['account_id']); ?>">
                         <i class='bxr  bx-pencil' ></i> 
                     </a>
                 </div>
