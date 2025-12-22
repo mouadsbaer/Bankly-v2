@@ -8,17 +8,28 @@
     $customers_nbr = $row[0];
 
 
-    $id_details = $_GET['id'];
-    $rqt2 = "SELECT customer_id, full_name, email, phone, CIN  FROM customers Where customer_id = '$id_details' ";
+
+    $id_details = (isset($_GET['id'])) ? intval($_GET['id']) : 0;
+    
+    if($id_details <= 0 ){
+        die("l'ID est invalide !");
+    }
+
+    $rqt2 = "SELECT customer_id, full_name, email, phone, CIN  FROM customers WHERE customer_id = '$id_details' ";
     $result2 = mysqli_query($connexion, $rqt2);
     $customers = mysqli_fetch_all($result2, MYSQLI_ASSOC);
-    print_r($customers);
     mysqli_free_result($result2);
+    
+    if(empty($customers)){
+        dir("No user found");
+    }
+    
+    $customer = $customers[0];
 
-    $c_full_name = $customers['full_name'];
-    $c_email = $customers['email'];
-    $c_phone = $customers['phone'];
-    $cin = $customers['CIN'];
+    $c_full_name = $customer['full_name'];
+    $c_email = $customer['email'];
+    $c_phone = $customer['phone'];
+    $cin = $customer['CIN'];
 
     
 

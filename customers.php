@@ -422,11 +422,11 @@
                         <i class='bxr  bx-trash-x'></i> 
                     </a>
                 </div>
-                <form action="details.php" method="get">
-                    <a class="details_btn" href="details.php?id= <?= htmlspecialchars($customer['customer_id'] ); ?>">
+                <div>
+                    <a class="details_btn" href="details.php?id= <?php echo htmlspecialchars($customer['customer_id'] ); ?>">
                         <i class='bxr  bx-dots-horizontal-rounded' style='color:#004E64'></i> 
                     </a>
-                </form>
+                </div>
             </div>
             
             <?php endforeach; ?>
