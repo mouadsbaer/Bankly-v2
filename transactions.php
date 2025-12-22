@@ -137,7 +137,7 @@
             <i class='bxr  bx-discussion' style='color:#ffffff'></i> 
         </div>
         <div class="menu_section last_item">
-            <a>LOG OUT</a>
+            <a href="index.php">LOG OUT</a>
             <i class='bxr  bx-arrow-out-right-square-half' style='color:#ffffff'></i> 
         </div>
         <div class="container_menu_lang_btn">
