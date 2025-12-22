@@ -1196,11 +1196,7 @@ color: #004E64;
     .body_part2_parag{
         color: #004E64;
         margin: 150px 0;
-        text-align: center;
-        font-weight: 500;
-        font-size: 2.7vmin;
-        
-
+        text-align: center;              
     }
     .section_account .section_account_inputs .section_account_inputs_msgs .msg_create{
         font-size: 1.5vmin;

@@ -69,11 +69,11 @@
         </div>
         <div class="body_part2" style="gap: 10px; flex-direction: row; padding-left: 20px;">
             <div class="body_part2_btn" style="border-radius: 10px;" >
-                <a href="login.php" style="font-weight: 600;">User Account</a>
+                <a href="login.php?account_type=user" style="font-weight: 600;">User Account</a>
                 <i class="fa-solid fa-user-plus" style="color: #fefefe; font-size: 2.5vmin;"></i>
             </div>
             <div class="body_part2_btn" style="border-radius: 10px;" id="agent_btn">
-                <a href="login.php">Agent Account</a>
+                <a href="login.php?account_type=agent">Agent Account</a>
                 <i class="fa-brands fa-black-tie" style="color: #fefefe; font-size: 2.5vmin;"></i>
             </div>
         </div>

@@ -1,12 +1,12 @@
 <?php
 
-
-    session_start();
     // Insetion de fichier pour connecter la base de donnees :
     include 'connect/db_connexion.php';
 
-    // Validation de formulaire de connexion :
+    // Gestion des types des utilisateurs :
+    $account_type = (isset($_GET['account_type'])) ? intval($_GET['account_type']) : 0;
 
+    // Validation de formulaire de connexion :
     $email = $pass = '';
     $errors = array('email' => '' , 'password' => '');
     if(isset($_POST['submit'])){
@@ -146,9 +146,9 @@
             </div>
             
         </div>
-        <div class="body_part2_parag">
-                <p>A universal solution <br> for financial customers and banks br providing 
-comprehensive banking services around the world</p>
+        <div class="body_part2_parag" style="font-size:2.7vmin; font-weight : 600; background:linear-gradient(to bottom, blue, white); -webkit-background-clip: text; background-clip: text;">
+                <p>" A universal solution <br> for financial customers and banks br providing 
+comprehensive banking services around the world "</p>
         </div>
     </section>
     <section class="section_account">
@@ -162,7 +162,7 @@ comprehensive banking services around the world</p>
                 <div><input type="text" placeholder="Type your email here" id="email_input" name="email_input" value="<?php echo $email ?>"><div style="color:red; font-size:1.6vmin; width:50%"> <?php echo $errors['email'] ?></div></div>
                 <div><input type="password" placeholder="Type your password here" id="password_input" name="password_input" value="<?php echo $pass ?>"><div style="color:red; font-size:1.6vmin; width:50%"> <?php echo $errors['password'] ?></div></div>
                 <div class="section_account_inputs_msgs">
-                    <p class="msg_create"><a href="register.php">Create account</a></p>
+                    <p class="msg_create"><a href="register.php" style="<?php echo ($account_type == 'user') ? 'display:block' : 'display:none' ?>">Create account</a></p>
                     <p class="msg_forgot"><a href="Forgot.php">Forgot your password ?</a></p>
                 </div>
                 <div class="container_btn_envoyer">
